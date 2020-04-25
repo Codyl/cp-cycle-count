@@ -16,20 +16,7 @@
         <title>CHL CS341 Homepage</title>
     </head>
     <body>
-        <form action="process.php" mrthod="post">
-            
-            Enter your name!: <input name="data" type="text"/>
-            <input type="submit"/>
-        </form>
-        <?php
-            
-            $age = 21 + 1;
-            $name = "Cody";
-            $interests[] = "this", "that";
-            for()
-            echo $name . " Homepage";
-            echo "Hello ". $visitor .", my name is" . $name . ". I am " . $age . ". My interests are ...";
-            echo '<pre>'; print_r($array); echo '</pre>';
-        ?>
+        
+        
     </body>
 </html>
