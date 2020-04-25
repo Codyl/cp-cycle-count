@@ -27,10 +27,10 @@
             
             $age = 21 + 1;
             $name = "Cody";
-            $interests = array("this", "that");
+            $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
-            echo "Hello ". $visitor .", my name is" . $name . ". I am " . $age . ".\n My interests are ...";
-            echo '<pre>'; print_r($array); echo '</pre>';
+            echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
+            echo '<pre>'; print_r($interests); echo '</pre>';
         ?>
     </body>
 </html>
