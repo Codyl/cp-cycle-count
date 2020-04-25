@@ -19,7 +19,7 @@
     <body>
         
         <img src=""/>
-        <form action="script.js" method="post">
+        <form action="index.php" method="post">
             
             Enter your name!: <input name="data" type="text"/>
             <input type="submit" onclick="testText()"/>
@@ -28,12 +28,13 @@
             
             $age = 21 + 1;
             $name = "Cody";
-            $visitor = 
+            $visitor = $_POST["data"];
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; print_r($interests); echo '</pre>';
-            echo "<p id='demo'> ???</p>"
+            echo "<p id='demo'> ???</p>";
+            echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr></table>";
         ?>
     </body>
 </html>
