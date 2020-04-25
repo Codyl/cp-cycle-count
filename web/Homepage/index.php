@@ -33,7 +33,7 @@
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; 
-            for($i = 0; $i < count($interests);i++)
+            for($i = 0; $i < count($interests);$i++)
             {
                 if($i < count($interests) - 1)
                 {echo $interests[i] . ", ";}
