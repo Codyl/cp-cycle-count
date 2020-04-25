@@ -17,7 +17,10 @@
         <title>CHL CS341 Homepage</title>
     </head>
     <body>
-        
+        <?php 
+        $name = "Cody";
+        echo "<p1><b>". $name . " Homepage" . "</b></p1>";
+        ?>
         <img id="photo" src="myPhoto.jpeg"/>
         <form action="index.php" method="post">
             
@@ -27,14 +30,14 @@
         <?php
             
             $age = 21 + 1;
-            $name = "Cody";
+            
             $visitor = $_POST["data"];
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
             $assignments = array(
                 array("hello php world!", "link here", "took a while to figure out what heroku is vs github."),
                 array("assignment 2", "link 2", "none")
             );
-            echo "<p1><b>". $name . " Homepage" . "</b></p1>";
+            
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; 
             for($i = 0; $i < count($interests);$i++)
