@@ -17,6 +17,12 @@
     </head>
     <body>
         
+        <img src=""/>
+        <form action="process.php" mrthod="post">
+            
+            Enter your name!: <input name="data" type="text"/>
+            <input type="submit"/>
+        </form>
         
     </body>
 </html>
