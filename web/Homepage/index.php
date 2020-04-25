@@ -18,7 +18,7 @@
     </head>
     <body>
         
-        <img src=""/>
+        <img id="photo" src="myImage.jpg"/>
         <form action="index.php" method="post">
             
             Enter your name!: <input name="data" type="text"/>
