@@ -28,7 +28,6 @@
             $age = 21 + 1;
             $name = "Cody";
             $interests = array("this", "that");
-            for()
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
             echo "Hello ". $visitor .", my name is" . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; print_r($array); echo '</pre>';
