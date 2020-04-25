@@ -49,6 +49,7 @@
             echo "</summary>";
         ?>
         </div>
+        </br>
         <div id="assignSec">
         <?php
             $assignments = array(
