@@ -30,6 +30,10 @@
             $name = "Cody";
             $visitor = $_POST["data"];
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
+            $assignments = array(
+                array("hello php world!", "link here", "took a while to figure out what heroku is vs github."),
+                array("assignment 2", "link 2", "none")
+            );
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; 
@@ -41,7 +45,15 @@
                 {echo $interests[$i];}
             } echo '</pre>';
             echo "<p id='demo'> ???</p>";
-            echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr></table>";
+            echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr>";
+            foreach($assignment in $assignments)
+            {
+                echo "<tr><td>".$assignment[0]."</td>";
+                echo "<tr><td>".$assignment[1]."</td>";
+                echo "<tr><td>".$assignment[2]."</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
         ?>
     </body>
 </html>
