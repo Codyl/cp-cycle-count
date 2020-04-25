@@ -22,11 +22,12 @@
         echo "<p1><b>". $name . " Homepage" . "</b></p1>";
         ?>
         <img id="photo" src="myPhoto.jpeg"/>
-        <form action="index.php" method="post">
+        <form name="formSec" action="index.php" method="post">
             
             Enter your name!: <input name="data" type="text"/>
             <input type="submit" onclick="testText()"/>
         </form>
+        <div id="bioSec">
         <?php
             
             $age = 21 + 1;
@@ -34,7 +35,7 @@
             $visitor = $_POST["data"];
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
             $assignments = array(
-                array("hello php world!", "link here", "took a while to figure out what heroku is vs github."),
+                array("hello php world!", "<a href='https://sleepy-brushlands-64789.herokuapp.com/hello.html'>Click here</a>", "took a while to figure out what heroku is vs github."),
                 array("assignment 2", "link 2", "none")
             );
             
@@ -47,7 +48,10 @@
                 else
                 {echo "and " . $interests[$i] . ". ";}
             } echo '</pre>';
-            echo "<p id='demo'> ?test area?</p>";
+        ?>
+        </div>
+        <div id="assignSec">
+        <?php
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr>";
             foreach($assignments as $assignment)
             {
@@ -58,5 +62,6 @@
             }
             echo "</table>";
         ?>
+        </div>
     </body>
 </html>
