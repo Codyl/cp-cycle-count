@@ -19,7 +19,7 @@
     <body>
         
         <img src=""/>
-        <form action="process.php" method="get">
+        <form action="script.js" method="post">
             
             Enter your name!: <input name="data" type="text"/>
             <input type="submit" onclick="testText()"/>

@@ -1,3 +1,3 @@
 function testText(){
-    document.getElementById('demo').innerHTML = 'Hello ';
+    document.getElementById('demo').innerHTML = 'Hello '+ $_POST["name"];
 }
