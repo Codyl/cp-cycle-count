@@ -16,7 +16,7 @@
         <script src="script.js"></script>
         <title>CHL CS341 Homepage</title>
         <script src="https://kit.fontawesome.com/yourcode.js"></script>
-        <link rel = "icon" href = "fas fa-laptop-code" type = "image/x-icon">
+        <link rel = "icon" href = "https://fontawesome.com/icons/laptop-code?style=solid" type = "image/x-icon">
     </head>
     <body>
         <?php 
