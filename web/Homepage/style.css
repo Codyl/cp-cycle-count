@@ -1,0 +1,30 @@
+body {
+    font-family: fantasy;
+    background-color: darkblue;
+}
+p1 
+{
+    color:green;
+    margin-left: 10px;
+}
+
+#hello_box {
+    border: 2px solid wheat;
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+#spence {
+    width: 150px;
+    border-radius: 50%;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(90deg);
+}
+input{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
