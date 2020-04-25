@@ -32,7 +32,14 @@
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
             echo "<p1><b>". $name . " Homepage" . "</b></p1>";
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
-            echo '<pre>'; print_r($interests); echo '</pre>';
+            echo '<pre>'; 
+            for($i = 0; $i < count($interests);i++)
+            {
+                if(i < count($interests) - 1)
+                echo $interests[i] . ", ";
+                else
+                echo $interests;
+            } echo '</pre>';
             echo "<p id='demo'> ???</p>";
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr></table>";
         ?>
