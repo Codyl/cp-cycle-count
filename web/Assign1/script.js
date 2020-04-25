@@ -8,7 +8,7 @@ function setColor(){
 function toggleVis(){
     $(document).ready(function(){
         $("vis").click(function(){
-          $("div3").hide();
+          $("#div3").hide();
         });
       });
 }
