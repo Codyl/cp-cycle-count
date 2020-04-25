@@ -3,5 +3,5 @@ function clickText(){
     alert("Clicked!");
 }
 function setColor(){
-    document.getElementById("div1").setColor = $_Post("color1");
+    document.getElementById("div1").setColor = $_Post("setColor");
 }
