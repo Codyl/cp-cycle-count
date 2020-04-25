@@ -35,10 +35,10 @@
             echo '<pre>'; 
             for($i = 0; $i < count($interests);i++)
             {
-                if(i < count($interests) - 1)
-                echo $interests[i] . ", ";
+                if($i < count($interests) - 1)
+                {echo $interests[i] . ", ";}
                 else
-                echo $interests;
+                {echo $interests;}
             } echo '</pre>';
             echo "<p id='demo'> ???</p>";
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr></table>";
