@@ -36,7 +36,7 @@
             for($i = 0; $i < count($interests);$i++)
             {
                 if($i < count($interests) - 1)
-                {echo $interests[i] . ", ";}
+                {echo $interests[$i] . ", ";}
                 else
                 {echo $interests;}
             } echo '</pre>';
