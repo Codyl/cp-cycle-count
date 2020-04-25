@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
         <title>CHL CS341 Homepage</title>
+        <script src="https://kit.fontawesome.com/yourcode.js"></script>
+        <link rel = "icon" href = "fas fa-laptop-code" type = "image/x-icon">
     </head>
     <body>
         <?php 
@@ -31,14 +33,10 @@
         <?php
             
             $age = 21 + 1;
-            
             $visitor = $_POST["data"];
             $interests = array("woodworking", "drawing", "making crafts", "playing Dungeons and dragons with friends");
-            $assignments = array(
-                array("hello php world!", "<a href='https://sleepy-brushlands-64789.herokuapp.com/hello.html'>Click here</a>", "took a while to figure out what heroku is vs github."),
-                array("assignment 2", "link 2", "none")
-            );
-            
+            echo "<p2>About me</p2>";
+            echo "<summary>";
             echo "Hello ". $visitor .", my name is " . $name . ". I am " . $age . ".\n My interests are ...";
             echo '<pre>'; 
             for($i = 0; $i < count($interests);$i++)
@@ -48,10 +46,15 @@
                 else
                 {echo "and " . $interests[$i] . ". ";}
             } echo '</pre>';
+            echo "</summary>";
         ?>
         </div>
         <div id="assignSec">
         <?php
+            $assignments = array(
+                array("hello php world!", "<a href='https://sleepy-brushlands-64789.herokuapp.com/hello.html'>Click here</a>", "took a while to figure out what heroku is vs github."),
+                array("assignment 2", "link 2", "none")
+            );
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr>";
             foreach($assignments as $assignment)
             {
