@@ -42,17 +42,11 @@
                 if($i < count($interests) - 1)
                 {echo $interests[$i] . ", ";}
                 else
-                {echo $interests[$i];}
+                {echo $interests[$i] . ". ";}
             } echo '</pre>';
-            echo "<p id='demo'> ???</p>";
+            echo "<p id='demo'> ?test area?</p>";
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr>";
-            foreach($assignment in $assignments)
-            {
-                echo "<tr><td>".$assignment[0]."</td>";
-                echo "<tr><td>".$assignment[1]."</td>";
-                echo "<tr><td>".$assignment[2]."</td>";
-                echo "</tr>";
-            }
+            
             echo "</table>";
         ?>
     </body>
