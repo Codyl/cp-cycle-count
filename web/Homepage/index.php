@@ -49,8 +49,8 @@
             foreach($assignments as $assignment)
             {
                 echo "<tr><td>".$assignment[0]."</td>";
-                echo "<tr><td>".$assignment[1]."</td>";
-                echo "<tr><td>".$assignment[2]."</td>";
+                echo "<td>".$assignment[1]."</td>";
+                echo "<td>".$assignment[2]."</td>";
                 echo "</tr>";
             }
             echo "</table>";
