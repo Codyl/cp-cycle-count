@@ -38,7 +38,7 @@
                 if($i < count($interests) - 1)
                 {echo $interests[$i] . ", ";}
                 else
-                {echo $interests;}
+                {echo $interests[$i];}
             } echo '</pre>';
             echo "<p id='demo'> ???</p>";
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr></table>";
