@@ -53,7 +53,7 @@
         <div id="assignSec">
         <?php
             $assignments = array(
-                array("hello php world!", "<a href='https://sleepy-brushlands-64789.herokuapp.com/hello.html'>Click here</a>", "took a while to figure out what heroku is vs github."),
+                array("hello php world!", "<a href='https://sleepy-brushlands-64789.herokuapp.com/Hello_world/hello.html'>Click here</a>", "took a while to figure out what heroku is vs github."),
                 array("assignment 2", "link 2", "none")
             );
             echo "<table><tr><th>Assignment Name</th><th>Link to assignment</th><th>Comments</th></tr>";
