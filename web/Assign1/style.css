@@ -1,6 +1,9 @@
 div{
     font-size: medium;
     background-color: green;
+    margin-bottom: 10px;
+    border-radius: 5%;
+    width: 100px;
 }
 div:hover{
     font-weight: bold;
