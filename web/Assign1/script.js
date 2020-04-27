@@ -2,7 +2,8 @@ function clickText(){
     alert("Clicked!");
 }
 function setColor(){
-    document.getElementById("div1").style.color = document.getElementById("div1").innerHTML;
+    alert("change color!");
+    document.getElementById('div1').style.backgroundColor = document.getElementById('setColor').value;
 }
 
 function toggleVis(){
