@@ -3,7 +3,7 @@ function clickText(){
 }
 function setColor(){
     alert("change color!");
-    document.getElementById('div1').style.backgroundColor = document.getElementById('setColor').value;
+    document.getElementById('div1').style.backgroundColor = document.getElementById('color').value;
 }
 
 function toggleVis(){
