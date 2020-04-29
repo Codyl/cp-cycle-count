@@ -5,7 +5,7 @@
     Class: cs341
     Summary: This is my home page for cs341.
 -->
-<html>
+<html lang="en">
     <head>
     <meta charset="utf-8" />
         <meta name="description" content="Web assignment">
@@ -13,21 +13,46 @@
         <meta name="author" content="Cody Lillywhite">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
         
         <title>CHL CS341 assign01</title>
     </head>
     <body>
-        <div id="div1">First</div>
-        <div id="div2">Second</div>
-        <div id="div3">Third</div>
-        <form action="index.php" method="post">
-            <input name="click" type="button" value="Click me" onclick="clickText()">
-            <input id="color" type="text">
-            <script src="script.js"></script>
-        </script>
-            <input name="color1" type="button" value="Change color" onclick="setColor()">
-            <input name="vis" type="button" value="toggle visability" onclick="toggleVis()">
+        <h1>Assign01</h1>
+        <summary>This assignment reviewed javascript, jquery, and bootstrap.</summary>
+        <div class=container>
+            <table>
+                <tr>
+                    <th>Div's</th>
+                    <th>Modifiers</th>
+                    <tr>
+                        <td><div class="demo" id="div1">First</div></td>
+                        <td><input id="color" type="text">
+                            <input type="button" value="Change color" onclick="setColorJQ()">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><div class="demo" id="div2">Second</div></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><div class="demo" id="div3">Third</div></td>
+                        <td><input id="vis" type="button" value="toggle visability"></td>
+                    </tr>
+                </th>
+            </table>
+            
+            
+            
+        </div>
+        
+        <form action="">
+            <p>Click this button to get an alert using javascript:</p>
+            <input type="button" value="Click me" onclick="clickText()"><br>
         </form>
+        <script src="script.js"></script>
     </body>
 </html>
