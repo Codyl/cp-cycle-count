@@ -15,6 +15,21 @@
     <body>
         <h2>Fortress</h2>
         <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
+        <i class="star"></i>
+        <label>Cost: $</label><i>6.34</i>
+        <label>Quantity</label>
+        <select id="cars" name="cars">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <input type="submit">
+        <div>
+            <h4>Comments</h4>
+            <input type="text" class="comment">
+            <div>Comments</div>
+        </div>
     </body>
     
 <?php 

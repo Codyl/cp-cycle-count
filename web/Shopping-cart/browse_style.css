@@ -51,3 +51,7 @@ h6, h5{
 .item_page_image{
     width: 50%;
 }
+.comment{
+    width: auto;
+    height: 100px;
+}
