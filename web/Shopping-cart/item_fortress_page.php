@@ -15,6 +15,7 @@
     <body>
         <h2>Fortress</h2>
         <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
+        <br>
         <i class="star"></i>
         <label>Cost: $</label><i>6.34</i>
         <label>Quantity</label>

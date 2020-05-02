@@ -50,6 +50,7 @@ h6, h5{
 }
 .item_page_image{
     width: 50%;
+    margin:auto;
 }
 .comment{
     width: auto;
