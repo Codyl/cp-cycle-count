@@ -17,7 +17,7 @@
             <label>Phone: </label><input type="text">
             <label>Email: </label><input type="text">
             <label>Adress: </label><input type="text">
-            <input type="submit" value="finalize purchase">
+            <a href="confirm-purchase.php"><input type="submit" value="finalize purchase"></a>
         </form>
     </body>
 </html>
