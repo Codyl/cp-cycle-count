@@ -48,3 +48,6 @@ h6, h5{
     background-color: blueviolet;
     margin: 10px;
 }
+.item_page_image{
+    width: 100%;
+}

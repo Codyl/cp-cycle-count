@@ -14,6 +14,7 @@
     </head>
     <body>
         <h2>Fortress</h2>
+        <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
     </body>
     
 <?php 
