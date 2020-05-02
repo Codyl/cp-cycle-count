@@ -25,7 +25,7 @@
             <option value="3">3</option>
             <option value="4">4</option>
         </select>
-        <input type="submit">
+        <input type="submit" value="order">
         <div>
             <h4>Comments</h4>
             <input type="text" class="comment">
