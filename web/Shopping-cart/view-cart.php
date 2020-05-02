@@ -24,6 +24,7 @@
                 <td>Total Cost: $$$</td>
             </tr>
         </table>
+        <a href="checkout.php"><input type="submit" value="checkout"><a>
 
 
     </body>
