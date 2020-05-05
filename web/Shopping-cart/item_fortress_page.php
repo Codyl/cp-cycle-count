@@ -27,6 +27,11 @@
                 <option value="4">4</option>
             </select>
             <input type="submit" value="order">
+            <?php 
+                echo "Added item to cart!\n";
+                $_SERVER["item"] = "Fortress";
+                echo $_SERVER["item"];
+            ?>
         </form>
         <div>
             <h4>Comments</h4>
