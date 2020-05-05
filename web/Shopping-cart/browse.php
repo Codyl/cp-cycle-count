@@ -30,15 +30,7 @@
             </form>
         </div>
         <!-- Notifies the user when an item has been added to their cart. -->
-        <?php 
-            if(isset($_POST["submit"])){
-                // $totalCost = $_POST["quantity"] * $_SESSION["cost"];
-                // fopen("cart.txt", "a");
-                // fwrite("cart.txt", $_SESSION["item"]);
-                alert("Added ".$_SESSION["item"]." to cart!");
-            }
-            else {alert("not posted...");}
-        ?>
+     
         <div id="items_list">
             <h3>Arts & Crafts</h3>
             <h4>Paintings</h4>
