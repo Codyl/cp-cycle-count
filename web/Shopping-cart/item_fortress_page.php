@@ -41,5 +41,6 @@
     $_SESSION["cost"] = 6.34;
     $_SESSION["item"] = "Fortress";
     $_SESSION["image"] = "item_dnd_fortress.jpg";
+    echo "recorded session!!!";
 ?>
 </html>
