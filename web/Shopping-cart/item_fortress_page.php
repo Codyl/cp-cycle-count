@@ -18,7 +18,7 @@
         <br>
         <i class="star"></i>
         
-        <form method="post" action="browse.html">
+        <form method="post" action="#">
             <label>Cost: $</label><i name="cost">6.34</i>
             <label>Quantity</label>
             <select id="cars" name="quantity">
