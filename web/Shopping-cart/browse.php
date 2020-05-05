@@ -32,12 +32,10 @@
         <!-- Notifies the user when an item has been added to their cart. -->
         <?php 
             if(isset($_POST["submit"])){
-            $quantity = $_POST["quantity"];
-            $cost = $_SERVER["cost"];
-            $totalCost = $quantity * $cost;
-            $total = $totalCost;
-            $note = "Added ".$_SERVER["item"]." to cart!";
-            alert($note);
+                $totalCost = $_POST["quantity"] * $_SESSION["cost"];
+                // fopen("cart.txt", "a");
+                // fwrite("cart.txt", $_SESSION["item"]);
+                alert("Added ".$_SESSION["item"]." to cart!");
             }
             else {alert("not posted...");}
         ?>
