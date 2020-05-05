@@ -18,7 +18,7 @@
         <br>
         <i class="star"></i>
         
-        <form method="post" action="#">
+        <form method="post" action="browse.php">
             <label>Cost: $</label><i name="cost">6.34</i>
             <label>Quantity</label>
             <select id="cars" name="quantity">
@@ -30,18 +30,6 @@
 
             <input type="submit" value="order">
         </form>
-        <?php 
-                if(isset($_POST["submit"])){
-                $quantity = $_POST["quantity"];
-                $cost = 6.34;
-                $totalCost = $quantity * $cost;
-                $_SERVER["cost"] = $totalCost;
-                $_SERVER["item"] = "Fortress";
-                $_SERVER["image"] = "item_dnd_fortress.jpg";
-                
-                echo "<div>Added ".$_SERVER["item"]." to cart!</div>";
-                }
-            ?>
         <div>
             <h4>Comments</h4>
             <input type="text" class="comment">
@@ -50,9 +38,8 @@
     </body>
     
 <?php 
-function addToCart(){
-    $_SERVER["cart"] = "something";
-    echo $_SERVER["cart"];
-}
+    $_SERVER["cost"] = 6.34;
+    $_SERVER["item"] = "Fortress";
+    $_SERVER["image"] = "item_dnd_fortress.jpg";
 ?>
 </html>
