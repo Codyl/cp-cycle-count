@@ -27,7 +27,10 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
-            <?php 
+
+            <input type="submit" value="order">
+        </form>
+        <?php 
                 if(isset($_POST["submit"])){
                 $quantity = $_POST["quantity"];
                 $cost = $_POST["cost"];
@@ -39,11 +42,6 @@
                 echo "<div>Added ".$_SERVER["item"]." to cart!</div>";
                 }
             ?>
-            <input type="submit" value="order">
-            <?php 
-                
-            ?>
-        </form>
         <div>
             <h4>Comments</h4>
             <input type="text" class="comment">
