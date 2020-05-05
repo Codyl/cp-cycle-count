@@ -18,14 +18,16 @@
         <br>
         <i class="star"></i>
         <label>Cost: $</label><i>6.34</i>
-        <label>Quantity</label>
-        <select id="cars" name="cars">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
-        <input type="submit" value="order">
+        <form method="post" action="if(confirm('Would you like to shop more before going to cart?')){browse.html}else{view}">
+            <label>Quantity</label>
+            <select id="cars" name="cars">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <input type="submit" value="order">
+        </form>
         <div>
             <h4>Comments</h4>
             <input type="text" class="comment">
