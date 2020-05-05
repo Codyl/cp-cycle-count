@@ -17,20 +17,31 @@
         <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
         <br>
         <i class="star"></i>
-        <label>Cost: $</label><i>6.34</i>
+        
         <form method="post" action="browse.html">
+            <label>Cost: $</label><i name="cost">6.34</i>
             <label>Quantity</label>
-            <select id="cars" name="cars">
+            <select id="cars" name="quantity">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
+            <?php 
+                if(isset($_POST["submit"])){
+                $quantity = $_POST["quantity"];
+                $cost = $_POST["cost"];
+                $totalCost = $quantity * $cost;
+                $_SERVER["cost"] = $totalCost;
+                $_SERVER["item"] = "Fortress";
+                $_SERVER["image"] = "item_dnd_fortress.jpg";
+                
+                echo "<div>Added ".$_SERVER["item"]." to cart!</div>";
+                }
+            ?>
             <input type="submit" value="order">
             <?php 
-                echo "Added item to cart!\n";
-                $_SERVER["item"] = "Fortress";
-                echo $_SERVER["item"];
+                
             ?>
         </form>
         <div>
