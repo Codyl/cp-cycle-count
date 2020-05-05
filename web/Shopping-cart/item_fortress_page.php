@@ -33,7 +33,7 @@
         <?php 
                 if(isset($_POST["submit"])){
                 $quantity = $_POST["quantity"];
-                $cost = $_POST["cost"];
+                $cost = 6.34;
                 $totalCost = $quantity * $cost;
                 $_SERVER["cost"] = $totalCost;
                 $_SERVER["item"] = "Fortress";
