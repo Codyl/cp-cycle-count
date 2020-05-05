@@ -18,7 +18,7 @@
         <br>
         <i class="star"></i>
         <label>Cost: $</label><i>6.34</i>
-        <form method="post" action="if(confirm('Would you like to shop more before going to cart?')){browse.html}else{view}">
+        <form method="post" action="browse.html">
             <label>Quantity</label>
             <select id="cars" name="cars">
                 <option value="1">1</option>
