@@ -41,6 +41,7 @@
             $note = "Added ".$_SERVER["item"]." to cart!";
             alert($note);
             }
+            else alert("not posted...");
         ?>
         <div id="items_list">
             <h3>Arts & Crafts</h3>
