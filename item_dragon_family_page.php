@@ -11,13 +11,13 @@
     </head>
     <body>
         <?php include('nav.php');?>
-        <h2>Fortress</h2>
-        <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
+        <h2>Dragon Family</h2>
+        <img class="item_page_image" alt="item" src="item_dragon_family.jpg">
         <br>
         <i class="star"></i>
         
         <form method="post" action="browse.php">
-            <label>Cost: $</label><i name="cost">6.34</i>
+            <label>Cost: $</label><i name="cost">8.30</i>
             <label>Quantity</label>
             <select id="cars" name="quantity">
                 <option value="1">1</option>
@@ -37,8 +37,9 @@
     
 <?php 
 session_start();
-    $_SESSION["cost"] = 6.34;
-    $_SESSION["item"] = "Fortress";
-    $_SESSION["image"] = "item_dnd_fortress.jpg";
+    $_SESSION["cost"] = 6.30;
+    $_SESSION["item"] = "Dragon Family";
+    $_SESSION["image"] = "item_dragon_family.jpg";
+    echo "recorded session!!!";
 ?>
 </html>

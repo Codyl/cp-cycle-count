@@ -5,12 +5,12 @@
     $file2 = fopen("cart.txt", "r");
     $lineIndex = 0;
     $target= $_GET["line"];
-    while(!feof($file))
+    while(!feof($file2))
     {
-        $line = fgets($file);
+        $line = fgets($file2);
         $lineIndex++;
-       
-            fwrite($file2,$line);
+       if($target != $lineIndex)
+            fwrite($file,$line);
         
     }
     fclose($file);

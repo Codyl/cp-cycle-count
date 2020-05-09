@@ -59,7 +59,7 @@
             </div>
             <div class="item">
                 <div class="rank_index"></div>
-                <a class="a-link-normal" href="">
+                <a class="a-link-normal" href="item_dragon_egg_page.php">
                     <div class="a-section a-spacing-mini">
                         <img class="item_image" alt="item" src="item_dragon_egg.jpg">
                     </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="item">
                 <div class="rank_index"></div>
-                <a class="a-link-normal" href="">
+                <a class="a-link-normal" href="item_dragon_family_page.php">
                     <div class="a-section a-spacing-mini">
                         <img class="item_image" alt="item" src="item_dragon_family.jpg">
                     </div>

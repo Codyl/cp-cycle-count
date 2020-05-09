@@ -29,7 +29,6 @@
                     {
                         file_put_contents("cart.txt", $trimmed);
                     }
-                    echo "<form>";
                 while(! feof($file))
                 {
                     $line = fgets($file);
@@ -54,11 +53,10 @@
                     echo "\t<td><input type='button' value='Remove from cart' onclick=remove($lineIndex)>";
                     echo "</td>\n</tr>\n";
                 }
-                echo "</form>";
                 fclose($file);
             ?>
         </table>
-        <form method="post" action="checkout.php">
+        <form method="post" action="checkout.php" onclick=checkForItems()>
             <input type="submit" value="checkout">
         </form>
         

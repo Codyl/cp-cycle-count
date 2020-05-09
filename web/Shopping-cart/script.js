@@ -10,7 +10,7 @@ function validateForm() {
   }
 
   function remove(i) { 
-    //document.getElementsByTagName("tr")[i-1].remove(); 
+    document.getElementsByTagName("tr")[i-1].remove(); 
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -22,4 +22,9 @@ function validateForm() {
     };
     xhttp.open("GET", "delete.php?line=" + i, true);
     xhttp.send();
+}
+
+function checkForItems(){
+  if( document.getElementsByTagName("tr").length < 2)
+  alert("You must have items in your cart first!");
 }
