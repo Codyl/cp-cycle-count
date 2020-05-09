@@ -10,6 +10,7 @@
             <title>CHL CS341 shoppingCart assignment</title>
     </head>
     <body>
+        <?php include('nav.php');?>
         <h2>Fortress</h2>
         <img class="item_page_image" alt="item" src="item_dnd_fortress.jpg">
         <br>

@@ -7,8 +7,10 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="browse_style.css">
             <title>DN Shopping Cart</title>
+            <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
+        <?php include("nav.php");?><br><br>
         <table>
             <tr>
                 <th>Index</th>
@@ -23,29 +25,36 @@
             <?php
                 $file = fopen("cart.txt","r");
                 $lineIndex = 0;
-                
+                if(!empty($_SESSION["trim"]))
+                    {
+                        file_put_contents("cart.txt", $trimmed);
+                    }
+                    echo "<form>";
                 while(! feof($file))
                 {
-                    $lineIndex++;
-
                     $line = fgets($file);
                     $lineOriginal = $line;
+                    //parse the data
+                    $lineIndex++;
                     $itemName = strtok($line,  ' ');
                     $line = str_replace($itemName, "", $line);
                     $quantity = strtok($line,  ' ');
                     $line = str_replace($quantity, "", $line);
                     $cost = strtok($line,  ' ');
                     $line = str_replace($cost, "", $line);
-                    $total = 0;
+                    $total = $cost * $quantity;
                     $image = strtok($line,  ' ');
-                    $trimmed = str_replace($line, "", file_get_contents("cart.txt"));
+                    
                     echo "<tr>\n\t<td>".$lineIndex."</td>\n\t<td>".$itemName."</td>\n";
                     echo "\t<td>".$quantity."</td>\n";
                     echo "\t<td>".$cost."</td>\n";
                     echo "\t<td>".$total."</td>\n";
                     echo "\t<td>".$image."</td>\n";
-                    echo "\t<td><input type='button' value='Remove from cart' onclick='file_put_contents('cart.txt',".$trimmed.")'></td>\n</tr>\n";
+                    //removal button
+                    echo "\t<td><input type='button' value='Remove from cart' onclick=remove($lineIndex)>";
+                    echo "</td>\n</tr>\n";
                 }
+                echo "</form>";
                 fclose($file);
             ?>
         </table>
@@ -54,6 +63,6 @@
         </form>
         
 
-        <script type="text/javascript" src="script.js"></script>
+        
     </body>
 </html>

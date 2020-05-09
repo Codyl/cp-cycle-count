@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
 #items_list{
     background-color: honeydew;
     margin: 10px;
@@ -34,16 +39,15 @@ h6, h5{
     text-align: center;
     margin-bottom: 0px;
 }
-.button{
-    width: 25%;
+div.button{
+    width: 19.5%;
     display: inline-block;
     background-color: red;
     border-style: solid;
-    border-width: 2px;
+    border-width: 4px;
     box-sizing: border-box;
     height:30px;
-    margin: 0px;
-    text-decoration: none;
+    text-align: center;
     
 }
 .button:hover{
@@ -74,4 +78,7 @@ h6, h5{
 }
 .formLabel{
     padding-bottom: 10px;
+}
+a {
+    color: inherit;
 }

@@ -13,7 +13,7 @@
             <meta name="author" content="Cody Lillywhite">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="browse_style.css">
-            <title>CHL CS341 shoppingCart assignment</title>
+            <title>DN browse</title>
     </head>
     <body>
         <!-- Notifies the user when an item has been added to their cart. -->
@@ -22,26 +22,20 @@
             if(!empty($_POST["quantity"])){
                 $totalCost = $_POST["quantity"] * $_SESSION["cost"];
                 $cart = fopen("cart.txt", "a");
-                $itemLine = "\n".$_SESSION["item"] . " " . $_POST["quantity"] . " " . $_SESSION["cost"] . " " . $_SESSION["image"];
+                if(!(empty(file_get_contents("cart.txt"))))
+                {
+                    $itemLine = "\n".$_SESSION["item"] . " " . $_POST["quantity"] . " " . $_SESSION["cost"] . " " . $_SESSION["image"];
+                }
+                else
+                {
+                    $itemLine = $_SESSION["item"] . " " . $_POST["quantity"] . " " . $_SESSION["cost"] . " " . $_SESSION["image"];
+                }
                 fwrite($cart, $itemLine);
-                $_SESSION["cartSize"] += 1;
-                echo "<script type='text/javascript'>alert('Added item to cart!');</script>";
+                //echo "<script type='text/javascript'>alert('Added item to cart!');</script>";
             }
-            else {echo "No postscript";}
+            $_SESSION["nav"] = "nav.php";
         ?>
-        <div class="title">
-            <h6>Welcome to the</h6>
-            <h1>Dragons Nest</h1>
-            <h5 id="store_type">Arts and Crafts store</h5>
-        </div>
-        <div class="nav">
-            <form>
-                <div class="button">About us</div>
-                <div class="button">Contact us</div>
-                <div class="button">Donate</div>
-                <a href="view-cart.php"><div class="button">View cart<?php echo "(".$_SESSION["cartSize"].")";?></div></a>
-            </form>
-        </div>
+        <?php include('nav.php');?>
         
         <div id="items_list">
             <h3>Arts & Crafts</h3>

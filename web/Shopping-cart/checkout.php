@@ -9,6 +9,7 @@
         <title>Dragons Nest checkout</title>
     </head>
     <body>
+        <?php include("nav.php");?><br><br>
         <form method="post" action="confirm-purchase.php" name="orderForm" onsubmit="return validateForm()">
             <label class="formLabel" for="name">Name: <input type="text" name="name" required></label><br>
             <label class="formLabel" for="phone">Phone: <input type="text" name="phone"></label><br>

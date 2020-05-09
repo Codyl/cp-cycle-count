@@ -16,8 +16,9 @@
         <title>Dragons Nest checkout</title>>
     </head>
     <body>
+        <?php session_start(); include("nav.php");?><br>
         <h2>Confirmed Purchase</h2>
-        <h5>Thank you for your purchase!</h5>
+        <h5>Thank you for your purchase <?php echo htmlspecialchars($_POST["name"])?>!</h5>
         <p>You purchased: </p>
         <table>
             <tr>
@@ -45,7 +46,7 @@
                     $line = str_replace($quantity, "", $line);
                     $cost = strtok($line,  ' ');
                     $line = str_replace($cost, "", $line);
-                    $total = 0;
+                    $total = $cost * $quantity;
                     $image = strtok($line,  ' ');
                     $trimmed = str_replace($line, "", file_get_contents("cart.txt"));
                     echo "<tr>\n\t<td>".$lineIndex."</td>\n\t<td>".$itemName."</td>\n";
@@ -56,7 +57,8 @@
                     echo "</tr>\n";
                 }
                 fclose($file);
-                echo "Your package will arrive at ".htmlspecialchars($_POST["address"])." within 3 days!";
+                echo "Your package(s) will arrive at ".htmlspecialchars($_POST["address"])." within 3 days!";
+                file_put_contents("cart.txt", "");
             ?>
         </table>
         <input type="submit" value="print confirmation">
