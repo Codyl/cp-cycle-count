@@ -52,7 +52,7 @@
                     
                 <div class="a-icon-row a-spacing-none">
                     <a class="a-link-normal" title="4.8 out of 5 stars" href="">
-                        <i class="star"><span class="a-icon-alt">X out of 5 stars</span></i>
+                        <i class="star"><span class="a-icon-alt">4.8 out of 5 stars</span></i>
                     </a>
                     <a class="a-size-small a-link-normal" href="">0</a>
                 </div>
@@ -63,12 +63,12 @@
                     <div class="a-section a-spacing-mini">
                         <img class="item_image" alt="item" src="item_dragon_egg.jpg">
                     </div>
-                    <div class="item_title" aria-hidden="true" data-rows="5">Item name</div>
+                    <div class="item_title" aria-hidden="true" data-rows="5">Dragon egg</div>
                 </a>
                     
                 <div class="a-icon-row a-spacing-none">
                     <a class="a-link-normal" title="4.8 out of 5 stars" href="">
-                        <i class="star"><span class="a-icon-alt">X out of 5 stars</span></i>
+                        <i class="star"><span class="a-icon-alt">4.8 out of 5 stars</span></i>
                     </a>
                     <a class="a-size-small a-link-normal" href="">0</a>
                 </div>
@@ -79,12 +79,12 @@
                     <div class="a-section a-spacing-mini">
                         <img class="item_image" alt="item" src="item_dragon_family.jpg">
                     </div>
-                    <div class="item_title" aria-hidden="true" data-rows="5">Item name</div>
+                    <div class="item_title" aria-hidden="true" data-rows="5">Dragon family</div>
                 </a>
                     
                 <div class="a-icon-row a-spacing-none">
                     <a class="a-link-normal" title="4.8 out of 5 stars" href="">
-                        <i class="star"><span class="a-icon-alt">X out of 5 stars</span></i>
+                        <i class="star"><span class="a-icon-alt">4.8 out of 5 stars</span></i>
                     </a>
                     <a class="a-size-small a-link-normal" href="">0</a>
                 </div>

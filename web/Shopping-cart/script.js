@@ -17,14 +17,9 @@ function validateForm() {
         if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             // document.getElementById("demo").innerHTML = xhttp.responseText;
-            alert(i);
+            //alert(i);
         }
     };
     xhttp.open("GET", "delete.php?line=" + i, true);
     xhttp.send();
-}
-
-function checkForItems(){
-  if( document.getElementsByTagName("tr").length < 2)
-  alert("You must have items in your cart first!");
 }

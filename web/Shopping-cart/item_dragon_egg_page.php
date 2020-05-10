@@ -38,7 +38,7 @@
 <?php 
 session_start();
     $_SESSION["cost"] = 9.99;
-    $_SESSION["item"] = "Dragon egg";
+    $_SESSION["item"] = "DragonEgg";
     $_SESSION["image"] = "item_dragon_egg.jpg";
 ?>
 </html>

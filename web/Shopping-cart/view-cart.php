@@ -12,24 +12,28 @@
     <body>
         <?php include("nav.php");?><br><br>
         <table>
-            <tr>
-                <th>Index</th>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Cost</th>
-                <th>Total</th>
-                <th>Image</th>
-                <th></th>
-            </tr>
+            <?php
+                if(empty(file_get_contents("cart.txt"))){
+                    echo "<span>Nothing in your cart yet. Go get some bling!</span>";
+                }
+                else{
+                    echo "<tr>
+                    <th>Index</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Total</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>";
+                }
+            ?>
+            
             <!-- For each line in the txt separate out the data and display it with a delete option -->
             <?php
                 $file = fopen("cart.txt","r");
                 $lineIndex = 0;
-                if(!empty($_SESSION["trim"]))
-                    {
-                        file_put_contents("cart.txt", $trimmed);
-                    }
-                while(! feof($file))
+                while(!feof($file) && !empty(file_get_contents("cart.txt")))
                 {
                     $line = fgets($file);
                     $lineOriginal = $line;
@@ -54,11 +58,16 @@
                     echo "</td>\n</tr>\n";
                 }
                 fclose($file);
+                
             ?>
         </table>
-        <form method="post" action="checkout.php" onclick=checkForItems()>
-            <input type="submit" value="checkout">
-        </form>
+        <?php
+            if(!empty(file_get_contents("cart.txt")))
+                echo "<form method='post' action='checkout.php'>
+                <input type='submit' value='checkout'>
+            </form>";
+        ?>
+        
         
 
         

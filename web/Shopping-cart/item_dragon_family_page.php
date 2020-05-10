@@ -38,7 +38,7 @@
 <?php 
 session_start();
     $_SESSION["cost"] = 6.30;
-    $_SESSION["item"] = "Dragon Family";
+    $_SESSION["item"] = "DragonFamily";
     $_SESSION["image"] = "item_dragon_family.jpg";
     echo "recorded session!!!";
 ?>

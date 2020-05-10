@@ -9,10 +9,11 @@
     {
         $line = fgets($file2);
         $lineIndex++;
-       if($target != $lineIndex)
+        if($target != $lineIndex)
             fwrite($file,$line);
-        
     }
+    if(!empty($file))
+    // fwrite($file,chr(8));
     fclose($file);
     fclose($file2);
     file_put_contents("cart.txt",file_get_contents("cartTemp.txt","r"));
