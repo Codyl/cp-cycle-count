@@ -10,7 +10,7 @@ CREATE TABLE warehouses (
 --ALTER
 --INSERT
 INSERT INTO warehouses (name)
-VALUES ('Kentucky');
+VALUES ('Kentucky'),('Idaho');
 --SELECT
 SELECT * FROM warehouses;
 SELECT name FROM warehouses WHERE name = 'Kentucky';
@@ -40,7 +40,8 @@ CREATE TABLE bins (
 -- ALTER TABLE bins
 --INSERT
 INSERT INTO bins (item_id, is_pick_bin, area, row, rack, shelf_lvl, position)
-VALUES ('DP600', false, 'A', 1, 1, 1, 'A');
+VALUES ('DP600', false, 'A', 1, 1, 1, 'A')
+,('DP600', true, 'A', 2, 1, 1, 'A');
 
 SELECT area, row, rack, shelf_lvl, position,
 concat(area, ':', row, ':', rack, ':', shelf_lvl, ':', position) AS name
