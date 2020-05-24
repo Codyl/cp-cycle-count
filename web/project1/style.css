@@ -1,0 +1,52 @@
+#logo{
+    width: 100px;
+}
+nav{
+    background-color: rgba(31, 30, 30, 0.717);
+}
+#itemsTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 10px;
+  }
+  
+  #itemsTable td, #itemsTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #itemsTable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #itemsTable tr:hover {background-color: #ddd;}
+  
+  #itemsTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+  }
+  #update{
+      background-color:green;
+      border-radius: 5px;
+  }
+  #totalCount{
+      float: right;
+      color: green;
+  }
+  #numToCount{
+      background-color: rgb(126, 126, 126);
+      border-radius: 5px 5px 0px 0px;
+  }
+  .inputData, #viewCount{
+      width: 40px;
+  }
+  ::-webkit-input-placeholder {
+    font-size: 8px;
+  }
+  select{
+      display: inline;
+  }
+  #warehouseTitle{
+      margin-bottom: 0;
+      text-align: center;
+  }
