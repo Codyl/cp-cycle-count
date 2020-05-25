@@ -44,14 +44,7 @@
         $qGetItem = $db->query("SELECT * FROM itemList{$whse} WHERE item_id = {$i['item_id']}");
         $itemLoc = $qGetItem->fetchAll();
         //Columns for bins by warehouse:
-//             bin_id serial8,
-//   name varchar(12),
-//   is_pick_bin boolean,
-//   area varchar(1),
-//   row int,
-//   rack int,
-//   shelf_lvl int,
-        $q2 = $db->query("SELECT * FROM bins{$whse} WHERE bin_id = {$itemLoc[0]['bin_id']}");
+        $q2 = $db->query("SELECT * FROM bins{$whse} WHERE bin_id = {$itemLoc[0]['bin_id']}");//error???
         $bin = $q2->fetchAll();
         //Columns for all items in existence at c&p:
         $q4 = $db->query("SELECT * FROM items WHERE item_id = {$itemLoc[0]['item_id']}");
@@ -84,13 +77,28 @@
                 <td>{$itemDetails[0]['qty_avail']}</td>
                 <td>{$itemDetails[0]['case_qty']}</td>
                 <td>{$itemDetails[0]['case_lyr']}</td>
-                <td><br><input type='text' class='inputData' name='pick' placeholder='Pieces'></td>
-                <td>";
-                    foreach($bin as $b){
-                        echo "{$b[3]}:{$b[4]}:{$b[5]}:{$b[6]}";
-                        echo "<br><input type='text' class='inputData' name='cases' placeholder='Cases'></td>";
+                <td><br>";
+                for($index = 0; $index < sizeof($itemLoc); $index++){
+                    $q4 = $db->query("SELECT * FROM bins{$whse} AS b JOIN itemList{$whse} AS il ON il.bin_id = b.bin_id");
+                    $binDetails = $q4->fetchAll();
+                    //var_dump($binDetails[$index]["is_pick_bin"]);
+                    if($binDetails[$index]["is_pick_bin"] == true){
+                    echo "{$binDetails[$index][3]}:{$binDetails[$index][4]}:{$binDetails[$index][5]}:{$binDetails[$index][6]}";
+                    echo "<br><input type='text' class='inputData' name='pick' placeholder='Pieces'><br>";
                     }
-                echo "<td>$countQty pc</td>
+                }
+                echo "</td>
+                <td>";
+                for($index = 0; $index < sizeof($itemLoc); $index++){
+                        $q4 = $db->query("SELECT * FROM bins{$whse} AS b JOIN itemList{$whse} AS il ON il.bin_id = b.bin_id");
+                        $binDetails = $q4->fetchAll();
+                        //var_dump($binDetails[$index]["is_pick_bin"]);
+                        if($binDetails[$index]["is_pick_bin"] != true){
+                        echo "{$binDetails[$index][3]}:{$binDetails[$index][4]}:{$binDetails[$index][5]}:{$binDetails[$index][6]}";
+                        echo "<br><input type='text' class='inputData' name='cases' placeholder='Cases'><br>";
+                        }
+                    }
+                echo "</td><td>$countQty pc</td>
                 <td>$writeQtyIO pc</td>
                 <td>$$totalCost</td>
                 <td><button type='submit' value='Update' id='update'>Update</button></td>
