@@ -37,10 +37,6 @@ VALUES
 (false, 'A', 15, 1, 2),
 (false, 'A', 15, 1, 3);
 
-SELECT area, row, rack, shelf_lvl,
-concat(area, ':', row, ':', rack, ':', shelf_lvl) AS name
-FROM binsKy;
-
 UPDATE binsKy--****
 SET name = concat(area, ':', row, ':', rack, ':', shelf_lvl);
 
@@ -74,10 +70,6 @@ VALUES
 (false, 'B', 1, 2, 1),
 (false, 'A', 2, 1, 1),
 (false, 'A', 2, 1, 2);
-
-SELECT area, row, rack, shelf_lvl,
-concat(area, ':', row, ':', rack, ':', shelf_lvl) AS name
-FROM binsIdaho;
 
 UPDATE binsIdaho--****
 SET name = concat(area, ':', row, ':', rack, ':', shelf_lvl);
@@ -140,8 +132,6 @@ CREATE TABLE items (
   name varchar(100) NOT NULL UNIQUE,
   cost float8 NOT NULL,
   description varchar(100),
-  qoh int NOT NULL,
-  qty_avail int NOT NULL,
   case_qty int NOT NULL,
   case_lyr int NOT NULL,
   cases_per_plt int NOT NULL
@@ -149,19 +139,19 @@ CREATE TABLE items (
 --ALTER TABLE here
 
 --INSERT data below here
-INSERT INTO items(name, cost, qoh, qty_avail, case_qty, case_lyr)
+INSERT INTO items(name, cost, case_qty, case_lyr, cases_per_plt)
 VALUES 
-('J071CL', 0.34, 18100, -100, 400, 4),
-('G841AM', 0.91, 0    , 0   , 80, 10),
-('DP600' , 0.51, 100  , 100 , 1200, 7),
-('J115'  , 0.91, 20    , 0   , 40, 4),
-('G040'  , 1.50, 250    , 0   , 12, 20),
-('M653BK', 0.21, 400    , 0   , 180, 5),
-('S400'  , 0.41, 900    , 0   , 1000, 7),
-('J101'  , 0.95, 12    , 0   , 100, 7),
-('M654BK', 0.50, 30    , 0   , 180, 5),
-('M653WH', 0.55, 188  , 0   , 180, 5),
-('B500'  , 2.50, 45   , 0   , 40, 2);
+('J071CL', 0.34, 400 , 4 , 16),
+('G841AM', 0.91, 80  , 10, 35),
+('DP600' , 0.51, 1200, 7 , 35),
+('J115'  , 0.91, 40  , 4 , 16),
+('G040'  , 1.50, 12  , 20, 150),
+('M653BK', 0.21, 180 , 5 , 28),
+('S400'  , 0.41, 1000, 7 , 35),
+('J101'  , 0.95, 100 , 7 , 20),
+('M654BK', 0.50, 180 , 5 , 35),
+('M653WH', 0.55, 180 , 5 , 35),
+('B500'  , 2.50, 40  , 2 , 16);
 SELECT * FROM items;
 
 
@@ -178,19 +168,21 @@ SELECT * FROM items;
 DROP TABLE IF EXISTS itemsKy cascade;
 CREATE TABLE itemsKy(
   id serial8,
-  item_id int,
+  item_id int NOT NULL,
   counts_id int,
+  qoh int NOT NULL,
+  qty_avail int NOT NULL,
   PRIMARY KEY(id),
   CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES items (item_id),
   CONSTRAINT fk_counts_id FOREIGN KEY (counts_id) REFERENCES countsKy (counts_id)
 );
 
-INSERT INTO itemsKy(item_id, counts_id)
+INSERT INTO itemsKy(item_id, counts_id, qoh, qty_avail)
 VALUES
-(1,1),(2,2);
-INSERT INTO itemsKy(item_id)
+(1,1,200,100),(2,2,1300,0);
+INSERT INTO itemsKy(item_id, qoh, qty_avail)
 VALUES
-(3),(4),(5),(6),(7),(8),(9),(10),(11);
+(3,200,100),(4,200,100),(5,200,100),(6,200,100),(7,200,100),(8,200,100),(9,200,100),(10,200,100),(11,200,100);
 
 --Find all counts for items in ky
 SELECT items.name, items.cost, (c.qty_end - c.qty_start) AS qty_change, (c.qty_end * items.cost - c.qty_start * items.cost) AS cost FROM countsKy AS c
@@ -209,17 +201,19 @@ CREATE TABLE itemsIdaho(
   id serial8,
   item_id int,
   counts_id int,
+  qoh int NOT NULL,
+  qty_avail int NOT NULL,
   PRIMARY KEY(id),
   CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES items (item_id),
   CONSTRAINT fk_counts_id FOREIGN KEY (counts_id) REFERENCES countsIdaho (counts_id)
 );
 
-INSERT INTO itemsIdaho(item_id, counts_id)
+INSERT INTO itemsIdaho(item_id, counts_id, qoh, qty_avail)
 VALUES
-(1,3);
-INSERT INTO itemsIdaho(item_id)
+(1,3, 400, 400);
+INSERT INTO itemsIdaho(item_id, qoh, qty_avail)
 VALUES
-(4),(5),(6),(7);
+(4, 5000, 4500),(5, 1400, 1300),(6, 4355, 4354),(7, 4000, 0);
 
 SELECT id, I.item_id, name FROM itemsIdaho AS II
 JOIN items AS I
