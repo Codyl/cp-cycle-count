@@ -41,6 +41,9 @@ SELECT area, row, rack, shelf_lvl,
 concat(area, ':', row, ':', rack, ':', shelf_lvl) AS name
 FROM binsKy;
 
+UPDATE binsKy--****
+SET name = concat(area, ':', row, ':', rack, ':', shelf_lvl);
+
 DROP TABLE IF EXISTS binsIdaho cascade;
 CREATE TABLE binsIdaho (
   bin_id serial8,
@@ -75,24 +78,43 @@ VALUES
 SELECT area, row, rack, shelf_lvl,
 concat(area, ':', row, ':', rack, ':', shelf_lvl) AS name
 FROM binsIdaho;
+
+UPDATE binsIdaho--****
+SET name = concat(area, ':', row, ':', rack, ':', shelf_lvl);
 /*
 *COUNTS
 */
 DROP TABLE IF EXISTS countsKy cascade;
 CREATE TABLE countsKy (
   counts_id serial8,
+  item_id int,
   count_date DATE,
   qty_start int,
   qty_end int,
   exceedsLimit boolean,
-  PRIMARY KEY (counts_id)
+  PRIMARY KEY (counts_id),
+  CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES items (item_id)
 );
 --ALTER
 --INSERT
-INSERT INTO countsKy (count_date, qty_start, qty_end, exceedsLimit)
-VALUES ('12/10/2019', 0, 100, false),
- ('12/21/2019', 100, 100, false),
- ('1/10/2018', 200, 0, false);
+INSERT INTO countsKy (count_date, qty_start, qty_end)
+VALUES ('12/10/2019', 0, 100),
+ ('12/21/2019', 100, 100),
+ ('1/10/2018', 200, 0);
+
+UPDATE countsKy AS c
+SET item_id= i.item_id
+FROM itemsKy AS i
+WHERE c.counts_id = i.counts_id;
+
+ UPDATE countsKy AS c--****
+ SET exceedsLimit=true
+ FROM items AS i
+ WHERE i.item_id = c.item_id AND qty_end-qty_start >= i.case_qty*3 OR qty_end-qty_start <= -i.case_qty*3;
+
+ SELECT item_id FROM countsKy
+ WHERE exceedsLimit=true;
+--need to create table orders and countsHistory
 
 DROP TABLE IF EXISTS countsIdaho cascade;
 CREATE TABLE countsIdaho (
@@ -114,7 +136,7 @@ VALUES ('12/10/2019', 0, 100, false),
 */
 DROP TABLE IF EXISTS items cascade;
 CREATE TABLE items (
-  item_id serial8 NOT NULL,
+  item_id serial8 NOT NULL PRIMARY KEY,
   name varchar(100) NOT NULL UNIQUE,
   cost float8 NOT NULL,
   description varchar(100),
@@ -122,7 +144,7 @@ CREATE TABLE items (
   qty_avail int NOT NULL,
   case_qty int NOT NULL,
   case_lyr int NOT NULL,
-  PRIMARY KEY (item_id)
+  cases_per_plt int NOT NULL
 );
 --ALTER TABLE here
 
