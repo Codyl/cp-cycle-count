@@ -149,10 +149,5 @@ function sortByTh(th){
     }
     //get whse from database
     function setWarehouse(warehouse) {
-        document.getElementById("warehouse").selectedIndex = warehouse;
-    }
-   
-    function getSelWarehouse() {
-        console.log("run");
-        return document.getElementById("warehouseSelect").selectedIndex;
+        document.getElementById("warehouse").selectedIndex = warehouse+1;
     }

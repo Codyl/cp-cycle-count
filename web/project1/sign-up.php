@@ -57,10 +57,21 @@
       ?>
     </label>
     <br>
+    <label for="warehouse">Please choose which warehouse you work at: 
     <select name="warehouse" id="warehouse">
-        <option value=1>Kentucky</option>
-        <option value=2>Idaho</option>
+      <option value=""></option>
+      <?php
+          require_once "../dbAccess.php";
+          $db = connectDB();
+          $q = $db->query("SELECT name FROM warehouses");
+          $warehouses = $q->fetchAll();
+          for($i = 0; $i < sizeof($warehouses);$i++) {
+              echo "<option value='{$i}'>{$warehouses[$i]['name']}</option>";
+          }
+      ?>
     </select>
+    </label>
+    <br>
 
     <input type="submit" id="submit" value="Sign Up" disabled>
   </form>

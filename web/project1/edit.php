@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="async.js"></script>
+    <script src="async.js">setWarehouse(1);</script>
+    <script src="model.php"></script>
 </head>
 <body>
 <h1>Admin: add item page</h1>
-    <form onload="setWarehouse(<?php echo $_SESSION['warehouse'];?>)">
-        <select name="warehouse" id="warehouse" onchange='this.form.submit()'>
-        <option value=""></option>
+    <form>
+        <select name="warehouse" id="warehouse" onchange=''>
+            <option value=""></option>
             <?php
                 require_once "../dbAccess.php";
                 $db = connectDB();
                 $q = $db->query("SELECT name FROM warehouses");
                 $warehouses = $q->fetchAll();
-                foreach($warehouses as $warehouse) {
-                    echo "<option>{$warehouse["name"]}</option>";
+                for($i = 0; $i < sizeof($warehouses);$i++) {
+                    echo "<option value='{$i}'>{$warehouses[$i]['name']}</option>";
+                    
                 }
             ?>
         </select>
@@ -39,14 +41,14 @@
             
                 require_once "../dbAccess.php";
                 $db = connectDB();
-            $q = $db->query("SELECT name FROM bins WHERE bins.warehouse_id ={$_POST['warehouseSelect']}");
+            $q = $db->query("SELECT name FROM bins WHERE bins.warehouse_id =1");
                 $warehouses = $q->fetchAll();
                 foreach($warehouses as $warehouse) {
                     echo "<option>{$warehouse[0]}</option>";
                 }
             ?>
         </select>
-        <button type="submit">Add item</button>
+        <button type="submit" onsubmit="addItemToBin(document.getElementById('warehouse').selectedIndex, document.getElementById('bin').selectedIndex)">Add item</button>
     </form>
 </body>
 </html>

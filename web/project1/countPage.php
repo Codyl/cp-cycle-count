@@ -4,8 +4,8 @@
     2. Update database with submitted form
 -->
 <?php
-  //session_start();
-  if ( ! $_SESSION["user_id"]) {
+  session_start();
+  if ( ! isset($_SESSION["user_id"])) {
     header("Location: /cs313-php/web/project1/?action=sign-in");
     die();
   }

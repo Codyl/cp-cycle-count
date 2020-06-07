@@ -5,7 +5,7 @@ require_once "model.php";
     if ($action == NULL) {
         $action = filter_input(INPUT_GET, "action");
       }
-      echo $action;
+      //echo $action;
     switch($action) {
         case "sign-in":
             include "sign-in.php";
@@ -78,17 +78,14 @@ require_once "model.php";
             /*
             * sign-out
             */
-            case "sign-out":
+        case "sign-out":
             session_start();
             unset($_SESSION["id"]);
             include "sign-in.php";
             break;
         
-            /*
-            * landing
-            */
-            default:
-            include "sign-in.php";
+        default:
+            include "countPage.php";
     }
 
 ?>
