@@ -1,20 +1,24 @@
 <?php
 function displayTable($numToCount){
-    require_once "dbAccess.php";
+    require_once "../dbAccess.php";
     $db = connectDB();
     //Identifiess warehouse abbrev. for psql tables
     $whse = "";
-    if($_POST['warehouse'] == "Kentucky") {$whse = "Ky";}
-    elseif($_POST['warehouse'] == "Idaho") {$whse = "Idaho";}
-    else{echo "Invalid warehouse";}
+    if($_POST['warehouse'] == "Kentucky") {
+        $whse = 1;
+    }
+    else{
+        $whse = 2;
+    }
     
-    $q = $db->query("SELECT * FROM counts{$whse}");
-    $countList = $q->fetchAll();
-    $q = $db->query("SELECT * FROM items{$whse}");
+    $q = $db->query("SELECT * FROM countHistory");
+    $countHistory = $q->fetchAll();
+$q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = {$whse}");
     $itemList = $q->fetchAll();
     $q->closeCursor();
 
-    $numCountsComplete = sizeof($countList);
+    $numCountsComplete = sizeof($countHistory);
+
     $numItems = sizeof($itemList);
 
     //Table display
@@ -36,8 +40,9 @@ function displayTable($numToCount){
             <th>Update</th>
             <th>Last counted</th>
           </tr>";
-    //Identify items to be displayed
-        $q = $db->query("SELECT items{$whse}.item_id,items{$whse}.counts_id FROM items{$whse} JOIN items ON items.item_id=items{$whse}.item_id ORDER BY items.name ASC LIMIT {$numToCount}");
+    //Identify items to be displayed *warehouse, oldest count, 
+        $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id FROM itemsWarehouse
+         JOIN counts ON itemsWarehouse.item_id=counts.item_id WHERE counts.warehouse_id={$whse} ORDER BY counts.count_date ASC LIMIT {$numToCount}");
         $itemsByLoc = $q->fetchAll();
         $index = 0;
     foreach($itemsByLoc as $i){
@@ -47,7 +52,7 @@ function displayTable($numToCount){
 }
 //Displays a single item 
 function itemDisplay(){
-    require_once "dbAccess.php";
+    require_once "../dbAccess.php";
     $whse = "";
     if($_POST['warehouse'] == "Kentucky") {$whse = "Ky";}
     elseif($_POST['warehouse'] == "Idaho") {$whse = "Idaho";}
@@ -101,7 +106,7 @@ function addNewCount($qoh,$qtyCounted, $writeQtyIO){
     SET exceedsLimit = true)");
     $q3 = $db->query("UPDATE item{$whse} SET qoh={$newAmount}");
 }
-function addItemToBin(){
+function addItemToBin($i){
     echo "worked!";
     //search to see if the bin exists in the database
     //add this as a new bin in the bins{$whse}
@@ -120,11 +125,11 @@ function fillTableData($i,$whse){
     $db = connectDB();
     //echo '<pre>'; var_dump($i); echo '</pre>';
     //Bins with this item at specified warehouse:id,item_id, bin_id
-    $qGetItem = $db->query("SELECT * FROM itemList{$whse} WHERE item_id = {$i['item_id']}");
+    $qGetItem = $db->query("SELECT * FROM itemBins WHERE item_id = {$i['item_id']}");
     $itemLoc = $qGetItem->fetchAll();
 
     //Gets information about the item:
-    $q4 = $db->query("SELECT i.name, iw.qoh, iw.qty_avail, i.case_qty, i.case_lyr, i.item_id,i.cases_per_plt, i.cost  FROM items AS i JOIN items{$whse} AS iw ON iw.item_id = {$i['item_id']} WHERE i.item_id = {$i['item_id']}");
+    $q4 = $db->query("SELECT i.name, ib.qoh, ib.qty_avail, i.case_qty, i.case_lyr, i.item_id,i.cases_per_plt, i.cost  FROM items AS i JOIN itemBins AS ib ON ib.item_id = {$i['item_id']} WHERE i.item_id = {$i['item_id']} AND ib.warehouse_id = {$whse}");
     $itemDetails = $q4->fetchAll();
 
     //Test the data with var dump
@@ -162,7 +167,7 @@ function fillTableData($i,$whse){
                 echo "<span id='pickCount_{$itemDetails[0]['name']}'>{$binDetails[0]['name']}</span>";
             else 
                 echo "<span id='pickCount_{$itemDetails[0]['name']}' value='0'>0</span>";
-            echo "<br><input type='number' class='inputData' name='pick' placeholder='Pieces' onblur='changeDisplayedPickCount(\"{$itemDetails[0]['name']}\",this, \"{$itemDetails[0]['cost']}\")'><br>";
+            echo "<br><input type='number' class='inputData' name='pick' placeholder='Pieces' id='pickBin' onblur='changeDisplayedPickCount(\"{$itemDetails[0]['name']}\",this, \"{$itemDetails[0]['cost']}\",$i)'><br>";
             echo "</td>
             <td>";
             //Display all Whse bins with this item

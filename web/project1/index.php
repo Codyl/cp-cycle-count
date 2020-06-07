@@ -1,57 +1,94 @@
-<!--
-    TO DO:
-    1. finish sorting func
-    2. Update database with submitted form
--->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Item Count</title>
-        <link href="style.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="async.js"></script>
-    </head>
-    <body>
-        <nav>
-            <img src="logo.svg" alt="C&P Logo" id="logo">
-        </nav>
-        <h1>Item Count</h1>
-        <form action="index.php" method="post" id="myForm" name="inventory">
-            <label for="warehouse">Warehouse</label>
-            <select name="warehouse" id="warehouse" onchange="showRCOpt()">
-                <option value=""></option>
-                <option value="Kentucky">Kentucky</option>
-                <option value="Idaho">Idaho</option>
-            </select>
-            
-            <label for="recordCount">Record count</label>
-            <select name="recordCount" id="recordCount" disabled onchange="this.form.submit()">
-                <option value=""></option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-            </select>
-            <span>or</span>
-            <label for="viewCount">Count specified item: </label>
-            <input type="text" name="viewCount" id="viewCount" placeholder='item name' disabled onblur="itemDisplay()">
-        </form>
-        <div id='countHistory'></div>
-        <!-- After form is filled next section appears -->
-        <?php
-            require_once "dbAccess.php";
-            require_once "tableDisplay.php";
-            if(!empty($_POST))
-            {
-                if(!empty($_POST['recordCount'])){
-                    echo "<h2 id='warehouseTitle'>Item count for {$_POST['warehouse']}</h2>";
-                    displayTable($_POST['recordCount']);
-                }
-                elseif(isset($_POST['viewCount'])){
-                    itemDisplay();
-                }
+<?php
+require_once "../dbAccess.php";
+require_once "model.php";
+    $action = filter_input(INPUT_POST, "action");
+    if ($action == NULL) {
+        $action = filter_input(INPUT_GET, "action");
+      }
+      echo $action;
+    switch($action) {
+        case "sign-in":
+            include "sign-in.php";
+            break;
+        
+        case "authenticate":            $filters = [
+                "username" => ["filter" => FILTER_SANITIZE_STRING],
+                "password" => ["filter" => FILTER_SANITIZE_STRING]
+              ];
+              $credentials = filter_input_array(INPUT_POST, $filters);
+          
+              if (authenticateUser($credentials)) {
+                include "countPage.php";
+              } else {
+                $message = "<p class='err'>The credentials you entered do not match our records.<p>";
+                include "sign-in.php";
+              }
+              break;
+              
+        case "sign-up":
+            include "sign-up.php";
+            break;
+
+        case "register":
+            $filters = [
+                "username" => ["filter" => FILTER_SANITIZE_STRING],
+                "password" => ["filter" => FILTER_SANITIZE_STRING],
+                "password2" => ["filter" => FILTER_SANITIZE_STRING],
+                "warehouse" => ["filter" => FILTER_SANITIZE_STRING]
+            ];
+            $credentials = filter_input_array(INPUT_POST, $filters);
+        
+            if (empty($credentials["username"]) || empty($credentials["password"]) ||
+                empty($credentials["password2"])) {
+                // IF any empty fields
+                $message = "<p class='err'>Please complete all fields.<p>";
+                $passwordAlert = true;
+                include "sign-up.php";
+                
+            } else if ($credentials["password"] !== $credentials["password2"]) {
+                // IF both passwords don't match
+                $message = "<p class='err'>The passwords you entered did not match.
+                                Please try again.<p>";
+                $passwordAlert = true;
+                include "sign-up.php";
+        
+            } else if ( ! preg_match("/(?=.*\d).{7,}/", $credentials["password"])) {
+                // IF passwords don't meet minimum complexity criteria
+                $message = "<p class='err'>The passwords must be at least 7 characters and contain a number.
+                                Please try again.<p>";
+                $passwordAlert = true;
+                include "sign-up.php";
+        
+            } else if (registerUser($credentials)) {
+                // IF registerUser() succeeds
+                $message = "<p class='success'>You have been registered!  You may now sign in.</p>";
+                include "sign-in.php";
+        
+            } else {
+                $message = "<p class='err'>There was a problem with your registration.
+                                Please try again.<p>";
+                include "sign-up.php";
             }
-        ?>
-    </body>
-</html>
+            break;
+
+        case "countPage":
+            include "countPage.php";
+            break;
+        
+            /*
+            * sign-out
+            */
+            case "sign-out":
+            session_start();
+            unset($_SESSION["id"]);
+            include "sign-in.php";
+            break;
+        
+            /*
+            * landing
+            */
+            default:
+            include "sign-in.php";
+    }
+
+?>
