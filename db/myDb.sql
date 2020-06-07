@@ -269,3 +269,12 @@ CREATE TABLE warehouses (
 INSERT INTO warehouses (name)
 VALUES ('Kentucky'),('Idaho');
 --SELECT
+
+DROP TABLE IF EXISTS userTable;
+CREATE TABLE userTable (
+  user_id SERIAL PRIMARY KEY,
+  username varchar,
+  password_hash varchar,
+  warehouse_id int,
+  counts_complete int
+);
