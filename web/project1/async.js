@@ -172,6 +172,5 @@ function sortByTh(th){
             // dataType: 'json',
             data: {functionname: 'addNewCount', arguments: [qoh,qtyCounted, writeQtyIO,item]}
         });
-        addNewCount();
     }
     
