@@ -165,3 +165,13 @@ function sortByTh(th){
         var secondDivContent = document.getElementById('orderForm');
         secondDivContent.innerHTML += firstDivContent.innerHTML;
     }
+    function addNewCount(qoh,qtyCounted, writeQtyIO,item){
+        jQuery.ajax({
+            type: "POST",
+            url: 'model.php',
+            // dataType: 'json',
+            data: {functionname: 'addNewCount', arguments: [qoh,qtyCounted, writeQtyIO,item]}
+        });
+        addNewCount();
+    }
+    
