@@ -29,7 +29,7 @@
             <img src="logo.svg" alt="C&P Logo" id="logo">
             <a href="/project1/?action=sign-out"><div class="right buttonBox">Sign out</div></a>
             <?php 
-            //echo '<br>$_SESSION["user_id"]'= $_SESSION["user_id"];
+            echo '<br>$_SESSION["user_id"]'= $_SESSION["user_id"];
             if($_SESSION["user_id"] == 1)
             echo "<a href='edit.php'><div class='right buttonBox'>Edit database</div></a>"+
             "<a href='editOrders.php'><div class='right buttonBox'>Edit orders</div></a>";
