@@ -80,12 +80,12 @@ require_once "model.php";
             */
         case "sign-out":
             session_start();
-            unset($_SESSION["id"]);
+            unset($_SESSION["user_id"]);
             include "sign-in.php";
             break;
         
         default:
-            include "countPage.php";
+            include "sign-in.php";
     }
 
 ?>

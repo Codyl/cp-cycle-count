@@ -1,78 +1,76 @@
-function changeDisplayedPickCount(itemName, elem, cost, item){
-    var countQty,writeQtyIO, totalCost;
-    //cases*case_qty + pieces in pick bin = countQty
-    //countQty - qoh = writeQtyIO
-    //totalCost = writeQtyIO * item cost
-    var newCount = elem.value;
-    var counttd = document.getElementById("count_"+itemName);
+function changeDisplayedPickCount(item){
+    var itemName = item['name'];
     var oldCount = document.getElementById("pickCount_"+itemName).innerText;
-    writeQtyIO = document.getElementById("writeIO_"+itemName);
-    var qoh = document.getElementById("qoh_"+itemName).innerText;
-    totalCost = document.getElementById("totalCost_"+itemName);
-    //console.log("qoh",qoh);
+    var elem = Number(document.getElementById('pickBin_'+itemName));
+    var newCount = elem.value;
+    
        //get new pick bin location php update display here
         if (newCount != 0) {
-            // countQty = Number(counttd.innerText) + Number(newCount);
-            // counttd.innerText = countQty;
-            // writeQtyIO.innerText = countQty - Number(qoh);
-            // totalCost.innerText = writeQtyIO.innerText * cost;
-            
+            changeDisplayQty(item);
             //update pick bin by calling php
             if(Number(oldCount) === 0) {
                 var newBin = prompt("Please enter the pick bin location of this amount");
                 if(newBin === "" || newBin == null) {
-                    document.getElementById('pickBin').value='';
+                    document.getElementById('pickBin_'+itemName).value='';
                 }
                 else{
-                    
+                    //addItemToBin(itemName,newBin,item[warehouse_id],Number(document.getElementById('pickBin_'+itemName).value));
                 }
-               
-                jQuery.ajax({
-                    type: "POST",
-                    url: 'tableDisplay.php',
-                    dataType: 'json',
-                    data: {functionname: 'addItemToBin', arguments: [item]},
-                
-                    success: function( msg ) {
-                        alert( "Data Saved: " + msg );
-                    }
-                });
             }
-            changeCountFont(writeQtyIO, totalCost);
+            
         }
         
 }
-function changeDisplayedPalletCount(itemName, elem, piecesPerCase, casesPerPallet, cost){
-    var newCount = elem.value;
+function changeDisplayQty(item) {
+    var itemName = item['name'];
     var counttd = document.getElementById("count_"+itemName);
     var writeQtyIO = document.getElementById("writeIO_"+itemName);
     var qoh = document.getElementById("qoh_"+itemName).innerText;
     var totalCost = document.getElementById("totalCost_"+itemName);
+    //var itemName = item['item_name'];
+    var cost = item['cost'];
+
+    var countQty = 0;
+    for(var i = 0;i<document.getElementsByClassName('pltcount_'+itemName).length;i++) {
+        if(document.getElementsByClassName('pltCount_'+itemName)[i].value != ''){
+            countQty += Number(document.getElementsByClassName('pltCount_'+itemName)[i].value) * Number(item['case_plt']) * Number(item['case_qty']);
+        }
+    }
+    for(var i = 0;i<document.getElementsByClassName('casecount_'+itemName).length;i++) {
+        if(document.getElementsByClassName('caseCount_'+itemName)[i].value != ''){
+            countQty += Number(document.getElementsByClassName('caseCount_'+itemName)[i].value) * Number(item['case_qty']);
+        }
+        
+    }
+    countQty += Number(document.getElementById('pickBin_'+itemName).value);
+    writeQtyIO.innerText = countQty - Number(qoh);
+    var temp = writeQtyIO.innerText * cost;
+    totalCost.innerText = temp.toFixed(2);
+    counttd.innerText = Number(countQty);
+    changeCountFont(writeQtyIO, totalCost);
+}
+function changeDisplayedPalletCount(item){
+    var elem = Number(document.getElementById('pltBin_'+item['name']));
+    var newCount = elem.value;
     if(newCount == 0)
     {
         //remove item from bin in database
         if(confirm("Remove this item from bulk row: ?")){
             console.log("removing item");//removeItemFromBin()
         }
+        
     }
     else
     {
-        //update bin qty = pallets*cases*pieces
-        // counttd.innerText = Number(counttd.innerText) + Number(newCount)*piecesPerCase*casesPerPallet;
-        // writeQtyIO.innerText = Number(counttd.innerText) - Number(qoh);
-        // totalCost.innerText = writeQtyIO.innerText * cost;
+        changeDisplayQty(item);
         //addItemToBin()
     }
-    changeCountFont(writeQtyIO, totalCost);
 }
 
 
-function changeDisplayedCaseCount(itemName, elem, piecesPerCase, cost){
+function changeDisplayedCaseCount(item){
+    var elem = Number(document.getElementById('caseBin_'+item['name']));
     var newCount = elem.value;
-    var counttd = document.getElementById("count_"+itemName);
-    var writeQtyIO = document.getElementById("writeIO_"+itemName);
-    var qoh = document.getElementById("qoh_"+itemName).innerText;
-    var totalCost = document.getElementById("totalCost_"+itemName);
     if(Number(newCount) === 0)
     {
         //remove item from bin in database
@@ -80,12 +78,9 @@ function changeDisplayedCaseCount(itemName, elem, piecesPerCase, cost){
             console.log("removing item");
     }
     else {
-        // counttd.innerText = Number(counttd.innerText) + Number(newCount)*piecesPerCase;
-        // writeQtyIO.innerText = Number(counttd.innerText) - Number(qoh);
-        // totalCost.innerText = writeQtyIO.innerText * cost;
+        changeDisplayQty(item);
         //addItemToBin()
     }
-    changeCountFont(writeQtyIO, totalCost);
 }
 function changeCountFont(writeQtyIO, totalCost){
     if(Number(writeQtyIO.innerText) > 0) {
@@ -107,8 +102,22 @@ function showRCOpt(){
 }
 function removetr(elem){
     if(confirm("Are you sure you want to update this count?")){
+        var animate = setInterval(shrink(),5);
+        
+        //update count infr using php
+
+    }
+}
+function shrink(elem){
+    //console.log("height",elem.offsetHeight);
+    if(elem.offsetHeight > 0){
+        //console.log("try")
+        elem.offsetHeight -=5;
+    }
+    else{
         elem.parentElement.removeChild(elem);
     }
+    
 }
 function sortByTh(th){
     // switch(th){
@@ -150,4 +159,9 @@ function sortByTh(th){
     //get whse from database
     function setWarehouse(warehouse) {
         document.getElementById("warehouse").selectedIndex = warehouse+1;
+    }
+    function addItemToOrder() {
+        var firstDivContent = document.getElementById('itemDiv1');
+        var secondDivContent = document.getElementById('orderForm');
+        secondDivContent.innerHTML += firstDivContent.innerHTML;
     }

@@ -62,6 +62,9 @@ nav{
   .right{
       float: right;
   }
+  .left{
+    float: left;
+}
   .buttonBox{
       background-color: wheat;
       border-radius:5px;
@@ -71,6 +74,12 @@ nav{
   .buttonBox:active {
       background-color: grey;
   }
+  .buttonBox:hover {
+      cursor: pointer;
+  }
   a {
       text-decoration: none;
+  }
+  body {
+    min-width:775px;
   }

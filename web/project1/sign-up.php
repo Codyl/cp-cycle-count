@@ -19,7 +19,10 @@
 </head>
 <body>
 
-  <header></header>
+    <nav>
+        <img src="logo.svg" alt="C&P Logo" id="logo">
+        <a href="/cs313-php/web/project1/?action=sign-in"><div class="right buttonBox">Sign in</div></a>
+    </nav>
 
   <h1>Sign Up</h1>
 

@@ -36,99 +36,60 @@
         }
     }
     //Need to work on getting these working
-function addNewCount($qoh,$qtyCounted, $writeQtyIO){
-  $q1 = $db->query("INSERT INTO counts{$whse} (count_date, qty_start, qty_end)
-  VALUES (GETDATE(), {$qoh}, {$qtyCounted})");
-  $q2 = $db->query("UPDATE counts{$whse} WHERE {$writeQtyIO} > 1400
+function addNewCount($qoh,$qtyCounted, $writeQtyIO,$item){
+  /*
+  item_id int NOT NULL,
+  count_date DATE NOT NULL,
+  qty_start int NOT NULL,
+  qty_end int NOT NULL,
+  exceedsLimit boolean NOT NULL,
+  warehouse_id int NOT NULL,*/
+  $q1 = $db->query("INSERT INTO counts (item_id,count_date, qty_start, qty_end,warehouse_id)
+  VALUES ({$item['item_id']},GETDATE(), {$qoh}, {$qtyCounted},{$item['warehouse_id']})");
+  $q2 = $db->query("UPDATE counts WHERE {$writeQtyIO} > 1400
   SET exceedsLimit = true)");
-  $q3 = $db->query("UPDATE item{$whse} SET qoh={$newAmount}");
+  $q2 = $db->query("SELECT count_id FROM counts WHERE item_id = {$item['item_id']} AND count_date = GETDATE()");
+  $countId = $q2->fetch();
+  $q1 = $db->query("INSERT INTO countHistory (count_id,item_id,warehouse_id)
+  VALUES ({$countId}, {$item['item_id']},{$item['warehouse_id']})");
+  $q3 = $db->query("UPDATE inventory SET qoh={$qtyCounted}");
 }
-function addItemToBin($item,$bin){
+function addItemToBin($item,$bin,$whse,$qty){
 // $q4 = $db->query("SELECT * FROM itemsWarehouse WHERE item_id = {$item} AND warehouse_id={$bin}");
 //   $binExists = $q4->fetch();
 //   if($binExists != null) {
-      $q1 = $db->prepare("INSERT INTO itemsBins (item_id, bin_id, quantity, warehouse_id)
-      VALUES  ({$item},{$bin_id}, 1, 1)");
-      $q1->execute();
-      echo "success";
+      require_once "../dbAccess.php";
+      $db = connectDB();
+      $q1 = $db->query("INSERT INTO itemBins (item_id, bin_id, quantity, warehouse_id)
+      VALUES  ({$item},{$bin}, {$qty}, {$whse})");
+      $q2 = $db->query("SELECT item_id FROM itemsWarehouse WHERE item_id = {$item}");
+      $inWhse = $q2->fetch();
+      if($inWhse == null)
+      {
+        $q1 = $db->query("INSERT INTO itemsWarehouse (item_id, warehouse_id)
+      VALUES  ({$item}, {$whse})");
+      //echo "UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}";
+      $q1 = $db->query("UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
+      }
+      echo "success: added item:{$item}, bin:{$bin}, Qty:{$qty}, warehouse:{$whse}";
   // }
 }
 function removeItemFromBin($item_id){
 $q1 = $db->query("DELETE * FROM itemsList{$whse} AS il WHERE il.item_id={$item_id}");
 }
-//For each item at the warehouse: display the row data
-function fillTableData($i,$whse){
+function addItemToOrder(){
+  //create order for each item
+  //add orders to itemsOrders
+  $q1 = $db->query("INSERT INTO orders (customer_id) VALUES ({$_POST['customers']})");
+  // $q2 = $db->query("SELECT count_id FROM counts WHERE item_id = {$item['item_id']} AND count_date = GETDATE()");
+  // $countId = $q2->fetch();
+
+}
+function addCustomer() {
+  require_once "../dbAccess.php";
   $db = connectDB();
-  //echo '<pre>'; var_dump($i); echo '</pre>';
-  //Bins with this item at specified warehouse:id,item_id, bin_id
-  $qGetItem = $db->query("SELECT * FROM itemBins WHERE item_id = {$i['item_id']}");
-  $itemLoc = $qGetItem->fetchAll();
-
-  //Gets information about the item:
-  $q4 = $db->query("SELECT i.name, ib.qoh, ib.qty_avail, i.case_qty, i.case_lyr, i.item_id,i.cases_per_plt, i.cost  FROM items AS i JOIN itemBins AS ib ON ib.item_id = {$i['item_id']} WHERE i.item_id = {$i['item_id']} AND ib.warehouse_id = {$whse}");
-  $itemDetails = $q4->fetchAll();
-
-  //Test the data with var dump
-  //echo var_dump($itemLoc);echo "\n";echo $itemLoc[0]["bin_id"];
-  $countQty = 0;
-  $writeQtyIO = 0;
-  $totalCost = 0;
-  //Test to ensure there is a existing item count otherwise default to 0's
-  if($i['counts_id'] != NULL)
-  {
-      //Get count details
-      $q3 = $db->query("SELECT * FROM counts{$whse} WHERE counts_id = {$i['counts_id']}");
-      $count = $q3->fetchAll();
-      //$writeQtyIO = $count[0]['qty_end']-$count[0]['qty_start'];
-      //$totalCost = number_format($itemDetails[0]['cost']*$writeQtyIO,2);
-      //$countQty = 0;//$count[0]['qty_end'];
-      $lastCounted = $count[0]['count_date'];
-  }
-  else {
-      $lastCounted = "Never been counted";
-  }
-      echo "<tr id='{$itemDetails[0]['name']}'>
-          <td>{$itemDetails[0]['name']}</td>
-          <td><textarea name='comment' id=''></textarea></td>
-          <td id='qoh_{$itemDetails[0]['name']}'>{$itemDetails[0]['qoh']}</td>
-          <td>{$itemDetails[0]['qty_avail']}</td>
-          <td>{$itemDetails[0]['case_qty']}</td>
-          <td>{$itemDetails[0]['case_lyr']}</td>
-          <td><br>";
-          //Pick bin
-          $q4 = $db->query("SELECT b.name,il.item_id FROM bins{$whse} AS b JOIN itemList{$whse} AS il 
-          ON il.bin_id = b.bin_id JOIN items{$whse} AS iw ON iw.item_id = il.item_id WHERE is_pick_bin=true");
-          $binDetails = $q4->fetchAll();
-          if($i["item_id"] == $binDetails[0]["item_id"])
-              echo "<span id='pickCount_{$itemDetails[0]['name']}'>{$binDetails[0]['name']}</span>";
-          else 
-              echo "<span id='pickCount_{$itemDetails[0]['name']}' value='0'>0</span>";
-          echo "<br><input type='number' class='inputData' name='pick' placeholder='Pieces' id='pickBin' onblur='changeDisplayedPickCount(\"{$itemDetails[0]['name']}\",this, \"{$itemDetails[0]['cost']}\",$i)'><br>";
-          echo "</td>
-          <td>";
-          //Display all Whse bins with this item
-          $q4 = $db->query("SELECT b.name,items.item_id,b.area FROM bins{$whse} AS b JOIN itemList{$whse} AS il ON il.bin_id = b.bin_id
-          JOIN items ON items.item_id=il.item_id WHERE is_pick_bin = false");
-          $binDetails = $q4->fetchAll();
-          for($index = 0;$index < sizeof($binDetails);$index++){
-              if($i["item_id"]==$binDetails[$index]["item_id"]){
-                  echo "{$binDetails[$index]['name']}";
-                  if($binDetails[$index]["area"] == 'A')
-                      echo "<br><input type='number' class='inputData' name='cases' placeholder='Cases' onchange='changeDisplayedCaseCount(\"{$itemDetails[0]['name']}\",this,\"{$itemDetails[0]['case_qty']}\", \"{$itemDetails[0]['cost']}\")'><br>";
-                  else
-                      echo "<br><input type='number' class='inputData' name='cases' placeholder='Pallets' onchange='changeDisplayedPalletCount(\"{$itemDetails[0]['name']}\",this,\"{$itemDetails[0]['case_qty']}\",\"{$itemDetails[0]['cases_per_plt']}\", \"{$itemDetails[0]['cost']}\")'><br>";
-              }
-          }
-          //$trName = $itemDetails[0]['name'];//echo $trName;
-          echo "</td>
-          <td><span id='count_{$itemDetails[0]['name']}'>{$countQty}</span> pc</td>
-          <td><span id='writeIO_{$itemDetails[0]['name']}'>{$writeQtyIO}</span> pc</td>
-          <td>$<span id='totalCost_{$itemDetails[0]['name']}'>$totalCost</span></td>
-          <td><button type='submit' value='Update' id='update' onclick='removetr({$itemDetails[0]['name']})'>Update</button></td>
-          <td>$lastCounted<br>";
-          if($lastCounted != "Never been counted")
-          echo "<button type='button' value='Count History' id='countButton'>View Count History</button></td>
-      </tr>";
+  $q1 = $db->query("INSERT INTO customers (name, email, phone, company, str_address, country, state, zip, city)
+      VALUES  ('{$_POST['name']}','{$_POST['email']}',{$_POST['phone']},'{$_POST['company']}','{$_POST['str_address']}','{$_POST['country']}','{$_POST['state']}','{$_POST['zip']}','{$_POST['city']}')");
 }
 
 

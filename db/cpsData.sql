@@ -93,16 +93,18 @@ DROP TABLE IF EXISTS inventory cascade;
 CREATE TABLE inventory(
     inventory_id SERIAL PRIMARY KEY,
     item_id int NOT NULL,
-    itemBin_id int NOT NULL,
+    itemsWarehouse_id int,
     count_history_id int,
     qoh int,
     qty_avail int,
-    warehouse_id int NOT NULL,
+    warehouse_id int,
     CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES items (item_id),
-    CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id) REFERENCES warehouses (warehouse_id)
+    CONSTRAINT fk_warehouse_id FOREIGN KEY (warehouse_id) REFERENCES warehouses (warehouse_id),
+    CONSTRAINT fk_itemsWarehouse_id FOREIGN KEY (itemsWarehouse_id) REFERENCES itemsWarehouse (itemsWarehouse_id)
 );
 ALTER TABLE inventory ALTER COLUMN qoh SET DEFAULT 0;
 ALTER TABLE inventory ALTER COLUMN qty_avail SET DEFAULT 0;
+
 
 DROP TABLE IF EXISTS customers cascade;
 CREATE TABLE customers(
@@ -122,7 +124,7 @@ DROP TABLE IF EXISTS orders cascade;
 CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     customer_id int NOT NULL,
-    date DATE NOT NULL,
+    date DATE DEFAULT CURRENT_DATE,
     CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
 
@@ -163,6 +165,16 @@ VALUES
 ('M654BK', 0.50, 180 , 5 , 35),
 ('M653WH', 0.55, 180 , 5 , 35),
 ('B500'  , 2.50, 40  , 2 , 16);
+
+--Insert a row for each item in item table into each warehouse
+DELETE FROM inventory;
+ALTER SEQUENCE inventory_inventory_id_seq RESTART WITH 1;
+INSERT INTO inventory(item_id)
+SELECT item_id FROM items;
+UPDATE inventory SET warehouse_id = 1;
+INSERT INTO inventory(item_id)
+SELECT item_id FROM items;
+UPDATE inventory SET warehouse_id = 2 WHERE warehouse_id IS NULL;
 
 INSERT INTO bins (warehouse_id,is_pick_bin, area, row, rack, shelf_lvl)
 VALUES 
