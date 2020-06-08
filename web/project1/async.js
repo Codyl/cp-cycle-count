@@ -165,7 +165,7 @@ function sortByTh(th){
         var secondDivContent = document.getElementById('orderForm');
         secondDivContent.innerHTML += firstDivContent.innerHTML;
     }
-    function addNewCount(qoh,qtyCounted, writeQtyIO,item){
+    function addNewCount1(qoh,qtyCounted, writeQtyIO,item){
         jQuery.ajax({
             type: "POST",
             url: 'model.php',

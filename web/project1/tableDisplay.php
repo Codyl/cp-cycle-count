@@ -188,7 +188,7 @@ function fillTableData($i,$whse){
             <td><span id='count_{$itemDetails[0]['name']}'>{$countQty}</span> pc</td>
             <td><span id='writeIO_{$itemDetails[0]['name']}'>{$writeQtyIO}</span> pc</td>
             <td>$<span id='totalCost_{$itemDetails[0]['name']}'>$totalCost</span></td>
-            <td><button type='submit' value='Update' id='update' onclick='addNewCount({$itemDetails[0]['qoh']},{$countQty}.{$writeQtyIO},";echo json_encode($itemDetails[0]);echo ");removetr({$itemDetails[0]['name']})'>Update</button></td>
+            <td><button type='submit' value='Update' id='update' onclick='addNewCount1({$itemDetails[0]['qoh']},{$countQty}.{$writeQtyIO},";echo json_encode($itemDetails[0]);echo ");removetr({$itemDetails[0]['name']})'>Update</button></td>
             <td>$lastCounted<br>";
             if($lastCounted != "Never been counted")
             echo "<button type='button' value='Count History' id='countButton'>View Count History</button></td>
