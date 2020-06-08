@@ -15,7 +15,7 @@
     <script src="async.js">setWarehouse(1);</script>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body onload="setWarehouse(<?php echo $_SESSION['warehouse'];>
+<body onload="setWarehouse(<?php echo $_SESSION['warehouse'];?>)">
 <nav>
     <img src="logo.svg" alt="C&P Logo" id="logo">
     <a href="sign-in.php"><div class="right buttonBox">Sign out</div></a>
