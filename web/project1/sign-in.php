@@ -9,7 +9,7 @@
 <body>
     <nav>
         <img src="logo.svg" alt="C&P Logo" id="logo">
-        <a href="/cs313-php/web/project1/?action=sign-up"><div class="right buttonBox">Sign up</div></a>
+        <a href="/project1/?action=sign-up"><div class="right buttonBox">Sign up</div></a>
     </nav>
     <h1>C&P Sign-in Page</h1>
     <?php
@@ -17,7 +17,7 @@
             echo $message;
         }
     ?>
-    <form action="/cs313-php/web/project1/?action=authenticate" method="post">
+    <form action="/project1/?action=authenticate" method="post">
         <label for="username">Username: 
             <input type="text" name="username" id="username">
         </label><br>

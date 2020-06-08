@@ -10,7 +10,7 @@
   session_start();
   echo $_SESSION["user_id"];
   if ( ! isset($_SESSION["user_id"])) {
-    header("Location: /cs313-php/web/project1/?action=sign-in");
+    header("Location: /project1/?action=sign-in");
     die();
   }
 ?>
@@ -28,13 +28,13 @@
     <body onload="setWarehouse(<?php echo $_SESSION['warehouse'];?>)">
         <nav>
             <img src="logo.svg" alt="C&P Logo" id="logo">
-            <a href="/cs313-php/web/project1/?action=sign-out"><div class="right buttonBox">Sign out</div></a>
+            <a href="/project1/?action=sign-out"><div class="right buttonBox">Sign out</div></a>
             <a href="edit.php"><div class="right buttonBox">Edit database</div></a>
             <a href="editOrders.php"><div class="right buttonBox">Edit orders</div></a>
             <a onclick='alert("increasing orders: will decrease qty available. Increasing items will add more to the count list. Items with the oldest count display last in the table. Bins should not display more than once. A bin is where an item is located in the warehouse.")'><div class="right buttonBox" style='padding-left:10px;padding-right:10px'>?</div></a>
         </nav>
         <h1>Item Count</h1>
-        <form action="/cs313-php/web/project1/?action=countPage" method="post" id="myForm" name="inventory">
+        <form action="/project1/?action=countPage" method="post" id="myForm" name="inventory">
             <label for="warehouse">Warehouse</label>
             <select name="warehouse" id="warehouse">
                 <option value=""></option>

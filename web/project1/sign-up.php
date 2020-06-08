@@ -21,7 +21,7 @@
 
     <nav>
         <img src="logo.svg" alt="C&P Logo" id="logo">
-        <a href="/cs313-php/web/project1/?action=sign-in"><div class="right buttonBox">Sign in</div></a>
+        <a href="/project1/?action=sign-in"><div class="right buttonBox">Sign in</div></a>
     </nav>
 
   <h1>Sign Up</h1>
@@ -32,7 +32,7 @@
     }
   ?>
 
-  <form name="register" action="/cs313-php/web/project1/?action=register" method="post">
+  <form name="register" action="/project1/?action=register" method="post">
     <label for="username">Username
       <input type="text" name="username" id="username" required autofocus>
     </label>
