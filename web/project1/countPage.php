@@ -30,9 +30,11 @@
             <a href="/project1/?action=sign-out"><div class="right buttonBox">Sign out</div></a>
             <?php 
             echo "id:{$_SESSION['user_id']}";
-            if($_SESSION["user_id"] == 1)
-            echo "<a href='edit.php'><div class='right buttonBox'>Edit database</div></a>"+
-            "<a href='editOrders.php'><div class='right buttonBox'>Edit orders</div></a>";
+            if($_SESSION["user_id"] == 1){
+                echo "<a href='edit.php'><div class='right buttonBox'>Edit database</div></a>"+
+                "<a href='editOrders.php'><div class='right buttonBox'>Edit orders</div></a>";
+            }
+            
             ?>
             
             <a onclick='alert("increasing orders: will decrease qty available. Increasing items will add more to the count list. Items with the oldest count display last in the table. Bins should not display more than once. A bin is where an item is located in the warehouse.")'><div class="right buttonBox" style='padding-left:10px;padding-right:10px'>?</div></a>
