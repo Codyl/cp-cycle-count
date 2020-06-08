@@ -107,7 +107,7 @@ function removetr(elem){
         function shrink(elem){
             //console.log("opacity",elem.style.opacity);
             pos--;
-            if(elem.opacity > 0){
+            if(elem.syle.opacity > 0){
                 elem.style.opacity = pos;
             }
             else{
