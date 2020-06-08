@@ -100,10 +100,12 @@ function showRCOpt(){
     document.getElementById("recordCount").disabled = false;
     document.getElementById("viewCount").disabled = false;
 }
-function removetr(elem){
+function removetr(elemName){
     if(confirm("Are you sure you want to update this count?")){
         var pos = 0;
+        elem=document.getElementById(elemName);
         var animate = setInterval(shrink,5,elem);
+        
         function shrink(elem){
             //console.log("opacity",elem.style.opacity);
             pos--;
