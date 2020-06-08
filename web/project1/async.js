@@ -103,7 +103,8 @@ function showRCOpt(){
 function removetr(elemName){
     if(confirm("Are you sure you want to update this count?")){
         var pos = 0;
-        elem=document.getElementById('{elemName}');
+        var elem=document.getElementById('{elemName}');
+        console.log(elem);
         var animate = setInterval(shrink,5,elem);
         
         function shrink(elem){
