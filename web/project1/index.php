@@ -18,6 +18,7 @@ require_once "model.php";
               $credentials = filter_input_array(INPUT_POST, $filters);
           
               if (authenticateUser($credentials)) {
+                  
                 include "countPage.php";
               } else {
                 $message = "<p class='err'>The credentials you entered do not match our records.<p>";
