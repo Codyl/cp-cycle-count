@@ -160,7 +160,7 @@ function sortByTh(th){
     //get whse from database
     function setWarehouse(warehouse) {
         console.log("warehouse",warehouse);
-        document.getElementById("warehouse").selectedIndex = warehouse-1;
+        document.getElementById("warehouse").selectedIndex = (warehouse+1);
     }
     function addItemToOrder() {
         var firstDivContent = document.getElementById('itemDiv1');
