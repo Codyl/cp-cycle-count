@@ -105,10 +105,9 @@ function removetr(elem){
         var pos = 0;
         var animate = setInterval(shrink,5,elem);
         function shrink(elem){
-            console.log("opacity",elem.style.opacity);
+            //console.log("opacity",elem.style.opacity);
             pos--;
             if(elem.opacity > 0){
-                //console.log("try")
                 elem.style.opacity = pos;
             }
             else{
