@@ -44,7 +44,7 @@
                 <?php
                     require_once "../dbAccess.php";
                     $db = connectDB();
-                    $q = $db->query("SELECT name FROM warehouses");
+                    $q = $db->query("SELECT name,warehouse_id FROM warehouses");
                     $warehouses = $q->fetchAll();
                     foreach($warehouses as $warehouse) {
                         echo "<option value='{$warehouse['warehouse_id']}'>{$warehouse['name']}</option>";
