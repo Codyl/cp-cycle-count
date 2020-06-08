@@ -109,7 +109,7 @@ function removetr(elem){
             pos--;
             if(elem.opacity > 0){
                 //console.log("try")
-                elem.opacity = pos;
+                elem.style.opacity = pos;
             }
             else{
                 clearInterval(animate);
