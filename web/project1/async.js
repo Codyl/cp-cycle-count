@@ -104,23 +104,21 @@ function removetr(elem){
     if(confirm("Are you sure you want to update this count?")){
         var pos = 0;
         var animate = setInterval(shrink,5,elem);
-        
-        //update count infr using php
+        function shrink(elem){
+            console.log("height",elem.offsetHeight);
+            pos--;
+            if(elem.offsetHeight > 0){
+                //console.log("try")
+                elem.offsetHeight = pos + "px";
+            }
+            else{
+                elem.parentElement.removeChild(elem);
+            }
+            
+        }
+    }
+}
 
-    }
-}
-function shrink(elem){
-    console.log("height",elem.offsetHeight);
-    pos--;
-    if(elem.offsetHeight > 0){
-        //console.log("try")
-        elem.offsetHeight = pos + "px";
-    }
-    else{
-        elem.parentElement.removeChild(elem);
-    }
-    
-}
 function sortByTh(th){
     // switch(th){
     //     case "item":
