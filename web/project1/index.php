@@ -85,7 +85,7 @@ require_once "model.php";
             break;
         
         default:
-            include "sign-in.php";
+            include "countPage.php";
     }
 
 ?>
