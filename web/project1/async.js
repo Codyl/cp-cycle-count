@@ -102,14 +102,14 @@ function showRCOpt(){
 }
 function removetr(elem){
     if(confirm("Are you sure you want to update this count?")){
-        var animate = setInterval(shrink(),5);
+        var animate = setInterval(shrink,5,elem);
         
         //update count infr using php
 
     }
 }
 function shrink(elem){
-    //console.log("height",elem.offsetHeight);
+    console.log("height",elem.offsetHeight);
     if(elem.offsetHeight > 0){
         //console.log("try")
         elem.offsetHeight -=5;
