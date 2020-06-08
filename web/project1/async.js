@@ -112,6 +112,7 @@ function removetr(elem){
                 elem.offsetHeight = pos + "px";
             }
             else{
+                clearInterval(animate);
                 elem.parentElement.removeChild(elem);
             }
             
