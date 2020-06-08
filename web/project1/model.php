@@ -24,7 +24,7 @@
         $success = $stmt->execute(); 
         $result = $stmt->fetch();
         $stmt->closeCursor();
-        echo $result["user_id"];
+        //echo $result["user_id"];
         if (password_verify($c["password"], $result["password_hash"])) {
           session_start();
           $_SESSION["user_id"] = $result["user_id"];

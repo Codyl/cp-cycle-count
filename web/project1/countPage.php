@@ -31,8 +31,7 @@
             <?php 
             echo "id:{$_SESSION['user_id']} end";
             if($_SESSION["user_id"] == 1){
-                echo "<a href='edit.php'><div class='right buttonBox'>Edit database</div></a>"+
-                "<a href='editOrders.php'><div class='right buttonBox'>Edit orders</div></a>";
+                echo "<a href='edit.php'><div class='right buttonBox'>Edit database</div></a><a href='editOrders.php'><div class='right buttonBox'>Edit orders</div></a>";
             }
             echo "x";
             ?>
