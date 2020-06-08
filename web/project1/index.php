@@ -86,7 +86,11 @@ require_once "model.php";
             break;
         
         default:
+        if(!empty($_SESSION["user_id"]))
             include "countPage.php";
+        else{
+            include "sign-in.php";
+        }
     }
 
 ?>
