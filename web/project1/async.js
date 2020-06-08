@@ -167,6 +167,7 @@ function sortByTh(th){
         secondDivContent.innerHTML += firstDivContent.innerHTML;
     }
     function addNewCount1(qoh,qtyCounted, writeQtyIO,item){
+        console.log("in addNewCount");
         jQuery.ajax({
             type: "POST",
             url: 'model.php',
