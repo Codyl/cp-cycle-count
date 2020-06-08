@@ -8,7 +8,6 @@
 <?php
 
   session_start();
-  echo $_SESSION["user_id"];
   if ( ! isset($_SESSION["user_id"])) {
     header("Location: /project1/?action=sign-in");
     die();
