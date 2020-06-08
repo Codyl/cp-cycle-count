@@ -100,12 +100,9 @@ function showRCOpt(){
     document.getElementById("recordCount").disabled = false;
     document.getElementById("viewCount").disabled = false;
 }
-function removetr(elemName){
+function removetr(elem){
     if(confirm("Are you sure you want to update this count?")){
         var pos = 0;
-        console.log(elemName);
-        var elem=document.getElementById('{elemName}');
-        console.log(elem);
         var animate = setInterval(shrink,5,elem);
         
         function shrink(elem){
@@ -162,6 +159,7 @@ function sortByTh(th){
     }
     //get whse from database
     function setWarehouse(warehouse) {
+        console.log("warehouse",warehouse);
         document.getElementById("warehouse").selectedIndex = warehouse;
     }
     function addItemToOrder() {

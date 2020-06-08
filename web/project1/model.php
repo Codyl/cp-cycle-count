@@ -37,13 +37,6 @@
     }
     //Need to work on getting these working
 function addNewCount($qoh,$qtyCounted, $writeQtyIO,$item){
-  /*
-  item_id int NOT NULL,
-  count_date DATE NOT NULL,
-  qty_start int NOT NULL,
-  qty_end int NOT NULL,
-  exceedsLimit boolean NOT NULL,
-  warehouse_id int NOT NULL,*/
   echo "console.log('here')";
   $q1 = $db->query("INSERT INTO counts (item_id,count_date, qty_start, qty_end,warehouse_id)
   VALUES ({$item['item_id']},GETDATE(), {$qoh}, {$qtyCounted},{$item['warehouse_id']})");
