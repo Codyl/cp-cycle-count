@@ -47,7 +47,7 @@
                     $q = $db->query("SELECT name FROM warehouses");
                     $warehouses = $q->fetchAll();
                     foreach($warehouses as $warehouse) {
-                        echo "<option>{$warehouse['name']}</option>";
+                        echo "<option$warehouse['warehouse_id']>{$warehouse['name']}</option>";
                     }
                 ?>
             </select>
