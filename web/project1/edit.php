@@ -1,7 +1,7 @@
 <?php
 
   session_start();
-  if ( ! isset($_SESSION["user_id"])) {
+  if ( ! isset($_SESSION["user_id"]) || $_SESSION["user_id"] != 1) {
     header("Location: /project1/?action=sign-in");
     die();
   }
