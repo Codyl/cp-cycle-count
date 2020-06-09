@@ -21,7 +21,7 @@ function displayTable($numToCount){
     
     $q = $db->query("SELECT * FROM countHistory");
     $countHistory = $q->fetchAll();
-    $q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = $_POST['warehouse']");
+$q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = {$_POST['warehouse']}");
     $itemList = $q->fetchAll();
     $q->closeCursor();
 
