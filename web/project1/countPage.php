@@ -62,7 +62,7 @@
             </select>
             <span>or</span>
             <label for="viewCount">Count specified item: </label>
-            <input type="text" name="viewCount" id="viewCount" placeholder='item name' onblur="itemDisplay()">
+            <input type="text" name="viewCount" id="viewCount" placeholder='item name' onblur="this.form.submit()">
         </form>
         <div id='countHistory'></div>
         <!-- After form is filled next section appears -->

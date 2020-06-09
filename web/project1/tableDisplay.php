@@ -69,7 +69,7 @@ function itemDisplay(){
     $db = connectDB();
     $q3 = $db->query("SELECT * FROM counts");
     $countList = $q3->fetchAll();
-    $q3 = $db->query("SELECT * FROM items");
+    $q3 = $db->query("SELECT * FROM itemsWarehouse");
     $itemList = $q3->fetchAll();
     
     $numCountsComplete = sizeof($countList);
