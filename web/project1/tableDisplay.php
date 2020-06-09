@@ -172,12 +172,12 @@ function fillTableData($i,$whse){
                 if($i["item_id"]==$binDetails[$index]["item_id"]){
                     echo "{$binDetails[$index]['name']}";
                     if($binDetails[$index]["area"] == 'A'){
-                        echo "<br><input type='number' min=0 class='inputData caseCount_{$itemDetails[0]['name']}' name='cases' placeholder='Cases' onblur='changeDisplayedCaseCount(";
+                        echo "<br><input type='number' min=0 class='inputData caseCount_{$itemDetails[$index]['name']}' name='cases' placeholder='Cases' onblur='changeDisplayedCaseCount(";
                         echo json_encode($itemDetails[0]);echo ")'><br>";
                     }
                         
                     else {
-                        echo "<br><input type='number' min=0 class='inputData pltCount_{$itemDetails[0]['name']}' name='cases' placeholder='Pallets' onblur='changeDisplayedPickCount(";
+                        echo "<br><input type='number' min=0 class='inputData pltCount_{$itemDetails[$index]['name']}' name='cases' placeholder='Pallets' onblur='changeDisplayedPickCount(";
                         echo json_encode($itemDetails[0]);echo ")'><br>";
                     }
                         
