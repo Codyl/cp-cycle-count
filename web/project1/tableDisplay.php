@@ -117,7 +117,7 @@ function fillTableData($i,$whse){
     $q4 = $db->query("SELECT i.name, inv.qoh, inv.qty_avail, i.case_qty, i.case_lyr, i.item_id,i.case_plt, i.cost  FROM items AS i 
     JOIN itemBins AS ib ON ib.item_id = {$i['item_id']} 
     JOIN inventory AS inv ON inv.item_id= {$i['item_id']}
-    WHERE i.item_id = {$i['item_id']} AND ib.warehouse_id = {$whse}");
+    WHERE i.item_id = {$i['item_id']} AND ib.warehouse_id = {$i['warehouse_id']}");
     $itemDetails = $q4->fetchAll();
   
     //Test the data with var dump
