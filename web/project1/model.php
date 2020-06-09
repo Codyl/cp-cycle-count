@@ -49,12 +49,13 @@ function addNewCount($qoh,$qtyCounted, $writeQtyIO,$item){
   $q3 = $db->query("UPDATE inventory SET qoh={$qtyCounted}");
 }
 function addItemToBin($item,$bin,$whse,$qty){
+  echo "test";
       require_once "../dbAccess.php";
       $db = connectDB();
       //Check if item is in bin already: if not put it, add to itemsWarehouse, update inventory qty
       $q = $db->query("SELECT quantity FROM itemsBins WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}");
       $alreadyInBin = $q->fetch();
-      echo "test";
+      
       if($alreadyInBin == null)
       {
         $q1 = $db->query("INSERT INTO itemBins (item_id, bin_id, quantity, warehouse_id)
