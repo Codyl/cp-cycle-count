@@ -69,7 +69,7 @@
         <?php
             require_once "../dbAccess.php";
             require_once "tableDisplay.php";
-            if($_POST['warehouse'])$nameWhse = 'Kentucky';
+            if($_POST['warehouse'] == 1)$nameWhse = 'Kentucky';
             else $nameWhse = 'Idaho';
             if(!empty($_POST))
             {
