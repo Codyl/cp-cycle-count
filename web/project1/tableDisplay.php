@@ -76,10 +76,8 @@ function itemDisplay(){
     $numItems = sizeof($itemList);
 
     try{
-    $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id FROM itemsWarehouse 
-                    JOIN items ON items.item_id=itemsWarehouse.item_id 
-                    JOIN counts ON counts.item_id = items.item_id
-                    WHERE items.name='{$_POST['viewCount']}'");
+    $q = $db->query("SELECT itemsWarehouse.item_id,itemsWarehouse.counts_id FROM itemsWarehouse 
+                    JOIN items ON items.item_id=itemsWarehouse.item_id WHERE items.name='{$_POST['viewCount']}'");
     $item = $q->fetchAll();
     if(!empty($item)){
         echo "<h1>{$_POST['viewCount']}</h1>";
