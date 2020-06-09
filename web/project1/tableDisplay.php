@@ -63,8 +63,8 @@ $q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = {$_POST['ware
 function itemDisplay(){
     require_once "../dbAccess.php";
     $whse = "";
-    if($_POST['warehouse'] == "Kentucky") {$whse = "Ky";}
-    elseif($_POST['warehouse'] == "Idaho") {$whse = "Idaho";}
+    if($_POST['warehouse'] == 1) {$whse = "Ky";}
+    elseif($_POST['warehouse'] == 2) {$whse = "Idaho";}
     else{echo "Invalid warehouse";}
     $db = connectDB();
     $q3 = $db->query("SELECT * FROM counts");
@@ -78,7 +78,7 @@ function itemDisplay(){
     try{
     $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id FROM itemsWarehouse 
                     JOIN items ON items.item_id=itemsWarehouse.item_id 
-                    JOIN counts ON counts.item_id=items.item_id
+                    LEFT JOIN counts ON counts.item_id=items.item_id
                     WHERE items.name='{$_POST['viewCount']}'");
     $item = $q->fetchAll();
     if(!empty($item)){
