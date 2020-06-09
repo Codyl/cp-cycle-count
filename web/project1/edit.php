@@ -69,12 +69,7 @@ else if($_POST['warehouse']){
             
             require_once "../dbAccess.php";
             $db = connectDB();
-            $id = 0;
-            if(empty($_SESSION['set_warehouse']))
-                $id = $_POST['warehouse'];
-            else
-                $id = $_SESSION['set_warehouse'];
-            $q = $db->query("SELECT name, bin_id FROM bins WHERE bins.warehouse_id={$id} ORDER BY bin_id");
+            $q = $db->query("SELECT name, bin_id FROM bins WHERE bins.warehouse_id={$_POST['warehouse']} ORDER BY bin_id");
             $warehouses = $q->fetchAll();
             foreach($warehouses as $warehouse) {
                 echo "<option value = '{$warehouse['bin_id']}'>{$warehouse[0]}</option>";
