@@ -52,7 +52,7 @@ function addItemToBin($item,$bin,$whse,$qty){
   
       require_once "../dbAccess.php";
       $db = connectDB();
-      echo "test: {$item},{$bin}, {$qty}, {$whse}";
+      echo "test: SELECT quantity FROM itemsBins WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}";
       //Check if item is in bin already: if not put it, add to itemsWarehouse, update inventory qty
       $q = $db->query("SELECT quantity FROM itemsBins WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}");
       $alreadyInBin = $q->fetch();
