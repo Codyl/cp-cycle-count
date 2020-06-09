@@ -76,7 +76,7 @@ function itemDisplay(){
     $numItems = sizeof($itemList);
 
     try{
-    $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id FROM itemsWarehouse 
+    $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id, itemsWarehouse.warehouse_id FROM itemsWarehouse 
                     JOIN items ON items.item_id=itemsWarehouse.item_id 
                     LEFT JOIN counts ON counts.item_id=items.item_id
                     WHERE items.name='{$_POST['viewCount']}'");
