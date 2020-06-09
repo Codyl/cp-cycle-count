@@ -74,8 +74,8 @@ function addItemToBin($item,$bin,$whse,$qty){
       }
       //If it is already in the bin then add to the quantity in the bin
       else{
-        echo " ".$qty;echo " ".$alreadyInBin[0];
-        $newQty = $qty+$alreadyInBin;
+        //echo " ".$qty;echo " ".$alreadyInBin[0];
+        $newQty = $qty+$alreadyInBin[0];
         $q1 = $db->query("UPDATE itemBins SET quantity = {$newQty} WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}");
       }
       $q1 = $db->query("UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
