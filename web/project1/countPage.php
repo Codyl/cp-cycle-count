@@ -69,10 +69,12 @@
         <?php
             require_once "../dbAccess.php";
             require_once "tableDisplay.php";
+            if($_POST['warehouse'])$nameWhse = 'Kentucky';
+            else $nameWhse = 'Idaho';
             if(!empty($_POST))
             {
                 if(!empty($_POST['recordCount'])){
-                    echo "<h2 id='warehouseTitle'>Item count for {$_POST['warehouse'].innertext}</h2>";
+                    echo "<h2 id='warehouseTitle'>Item count for {$nameWhse}</h2>";
                     displayTable($_POST['recordCount']);
                 }
                 elseif(isset($_POST['viewCount'])){
