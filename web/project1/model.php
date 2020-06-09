@@ -49,24 +49,35 @@ function addNewCount($qoh,$qtyCounted, $writeQtyIO,$item){
   $q3 = $db->query("UPDATE inventory SET qoh={$qtyCounted}");
 }
 function addItemToBin($item,$bin,$whse,$qty){
-// $q4 = $db->query("SELECT * FROM itemsWarehouse WHERE item_id = {$item} AND warehouse_id={$bin}");
-//   $binExists = $q4->fetch();
-//   if($binExists != null) {
       require_once "../dbAccess.php";
       $db = connectDB();
-      $q1 = $db->query("INSERT INTO itemBins (item_id, bin_id, quantity, warehouse_id)
-      VALUES  ({$item},{$bin}, {$qty}, {$whse})");
-      $q2 = $db->query("SELECT item_id FROM itemsWarehouse WHERE item_id = {$item}");
-      $inWhse = $q2->fetch();
-      if($inWhse == null)
+      //Check if item is in bin already: if not put it, add to itemsWarehouse, update inventory qty
+      $q = $db->query("SELECT * FROM itemsBins WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}");
+      $alreadyInBin = $q->fetch();
+      if($alreadyInBin == null)
       {
-        $q1 = $db->query("INSERT INTO itemsWarehouse (item_id, warehouse_id)
-      VALUES  ({$item}, {$whse})");
-      //echo "UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}";
-      $q1 = $db->query("UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
+        $q1 = $db->query("INSERT INTO itemBins (item_id, bin_id, quantity, warehouse_id)
+        VALUES  ({$item},{$bin}, {$qty}, {$whse})");
+        echo "success: added item:{$item}, bin:{$bin}, Qty:{$qty}, warehouse:{$whse}";
+        $q2 = $db->query("SELECT item_id FROM itemsWarehouse WHERE item_id = {$item} AND warehouse_id={$whse}");
+        $inWhse = $q2->fetch();
+        if($inWhse == null)
+        {
+          $q1 = $db->query("INSERT INTO itemsWarehouse (item_id, warehouse_id)
+                            VALUES  ({$item}, {$whse})");
+        //echo "UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}";
+        }
+        
       }
-      echo "success: added item:{$item}, bin:{$bin}, Qty:{$qty}, warehouse:{$whse}";
-  // }
+      //If it is already in the bin then add to the quantity in the bin
+      else{
+        $newQty = $qty+$alreadyInBin['quantity'];
+        $q1 = $db->query("UPDATE itemsBins SET quantity = {$newQty}");
+      }
+      $q1 = $db->query("UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
+        
+      
+      
 }
 function removeItemFromBin($item_id){
 $q1 = $db->query("DELETE * FROM itemsList{$whse} AS il WHERE il.item_id={$item_id}");
