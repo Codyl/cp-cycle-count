@@ -72,7 +72,7 @@
             if(!empty($_POST))
             {
                 if(!empty($_POST['recordCount'])){
-                    echo "<h2 id='warehouseTitle'>Item count for {$_POST['warehouse']}</h2>";
+                    echo "<h2 id='warehouseTitle'>Item count for {$_POST['warehouse'].innertext}</h2>";
                     displayTable($_POST['recordCount']);
                 }
                 elseif(isset($_POST['viewCount'])){

@@ -12,12 +12,7 @@ function displayTable($numToCount){
     $db = connectDB();
     //Identifiess warehouse abbrev. for psql tables
     $whse = "";
-    if($_POST['warehouse'] == "Kentucky") {
-        $whse = 1;
-    }
-    else {
-        $whse = 2;
-    }
+
     
     $q = $db->query("SELECT * FROM countHistory");
     $countHistory = $q->fetchAll();
@@ -55,7 +50,7 @@ $q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = {$_POST['ware
     $itemsByLoc = $q->fetchAll();
     $index = 0;
     foreach($itemsByLoc as $i){
-        fillTableData($i,$whse);
+        fillTableData($i,$_POST['warehouse']);
     }
     echo "</table>";
 }
@@ -130,8 +125,8 @@ function fillTableData($i,$whse){
     if($i['counts_id'] != NULL)
     {
         //Get count details
-        $q3 = $db->query("SELECT * FROM counts{$whse} WHERE counts_id = {$i['counts_id']}");
-        $count = $q3->fetchAll();
+        // $q3 = $db->query("SELECT * FROM counts{$whse} WHERE counts_id = {$i['counts_id']}");
+        // $count = $q3->fetchAll();
         //$writeQtyIO = $count[0]['qty_end']-$count[0]['qty_start'];
         //$totalCost = number_format($itemDetails[0]['cost']*$writeQtyIO,2);
         //$countQty = 0;//$count[0]['qty_end'];
