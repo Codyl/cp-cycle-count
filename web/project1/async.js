@@ -161,6 +161,7 @@ function sortByTh(th){
     function setWarehouse(warehouse) {
         console.log("warehouse",warehouse);
         document.getElementById("warehouse").selectedIndex = (warehouse+1);
+        $_SESSION['set_warehouse'] = (warehouse+1);
     }
     function addItemToOrder() {
         var firstDivContent = document.getElementById('itemDiv1');
