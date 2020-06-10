@@ -98,7 +98,7 @@ function itemDisplay(){
           </tr>";
         fillTableData($item[0],$whse);
         }
-        else{echo "<script type='text/javascript'>alert('Invalid item name for {$_POST['warehouse']}');</script>";}
+        else{echo "<script type='text/javascript'>alert('Invalid item name for {$whse}');</script>";}
     }
     catch(Exception $e){
         echo 'Caught exception: ',  $e->getMessage(), "\n";
