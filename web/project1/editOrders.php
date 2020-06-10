@@ -49,7 +49,8 @@
                 <?php
                     require_once "../dbAccess.php";
                     $db = connectDB();
-                    $q = $db->query("SELECT name, item_id FROM itemsWarehouse ORDER BY item_id");
+                    $q = $db->query("SELECT i.name, i.item_id FROM itemsWarehouse iw
+                    JOIN items i ORDER BY name");
                     $items = $q->fetchAll();
                     foreach($items as $item) {
                         echo "<option value = '{$item['item_id']}'>{$item["name"]}</option>";
