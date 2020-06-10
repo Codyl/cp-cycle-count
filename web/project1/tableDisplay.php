@@ -74,7 +74,7 @@ function itemDisplay(){
     $q = $db->query("SELECT itemsWarehouse.item_id,counts.counts_id, itemsWarehouse.warehouse_id FROM itemsWarehouse 
                     JOIN items ON items.item_id=itemsWarehouse.item_id 
                     LEFT JOIN counts ON counts.item_id=items.item_id
-                    WHERE items.name='{$_POST['viewCount']}'");
+                    WHERE items.name='{$_POST['viewCount']}' AND itemsWarehouse.warehouse_id ='{$_POST['warehouse']}' ");
     $item = $q->fetchAll();
     if(!empty($item)){
         echo "<h1>{$_POST['viewCount']}</h1>";
