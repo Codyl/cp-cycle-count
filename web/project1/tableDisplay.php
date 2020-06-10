@@ -46,7 +46,7 @@ $q = $db->query("SELECT * FROM itemsWarehouse WHERE warehouse_id = {$_POST['ware
         //Identify items to be displayed *warehouse, oldest count, 
     $q = $db->query("SELECT i.warehouse_id, it.item_id, c.count_date, c.count_date, c.counts_id, it.case_qty  FROM itemsWarehouse i 
     JOIN items it ON it.item_id=i.item_id
-    LEFT JOIN counts c ON c.item_id=i.item_id AND c.warehouse_id={$_POST[warehouse]");
+LEFT JOIN counts c ON c.item_id=i.item_id AND c.warehouse_id={$_POST['warehouse']}");
     $itemsByLoc = $q->fetchAll();
     $index = 0;
     foreach($itemsByLoc as $i){
