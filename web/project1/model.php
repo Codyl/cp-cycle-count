@@ -77,6 +77,8 @@ function addItemToBin($item,$bin,$whse,$qty){
         $q1 = $db->query("UPDATE itemBins SET quantity = {$newQty} WHERE warehouse_id={$whse} AND item_id={$item} AND bin_id={$bin}");
       }
       $q1 = $db->query("UPDATE inventory SET qoh = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
+      if($inWhse == null) $q1 = $db->query("UPDATE inventory SET qty_avail = (SELECT qoh FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
+      else $q1 = $db->query("UPDATE inventory SET qty_avail = (SELECT qty_avail FROM inventory WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}) + {$qty} WHERE item_id = {$item} AND inventory.warehouse_id = {$whse}");
         
       
       
@@ -88,6 +90,7 @@ function addItemToOrder(){
   //create order for each item
   //add orders to itemsOrders
   $q1 = $db->query("INSERT INTO orders (customer_id) VALUES ({$_POST['customers']})");
+  $q1 = $db->query("INSERT INTO itemsOrders (item_id,order_id,quantity, warehouse_id) VALUES ({$_POST['customers']})");
   // $q2 = $db->query("SELECT count_id FROM counts WHERE item_id = {$item['item_id']} AND count_date = GETDATE()");
   // $countId = $q2->fetch();
 
@@ -98,6 +101,4 @@ function addCustomer() {
   $q1 = $db->query("INSERT INTO customers (name, email, phone, company, str_address, country, state, zip, city)
       VALUES  ('{$_POST['name']}','{$_POST['email']}',{$_POST['phone']},'{$_POST['company']}','{$_POST['str_address']}','{$_POST['country']}','{$_POST['state']}','{$_POST['zip']}','{$_POST['city']}')");
 }
-
-
 ?>
